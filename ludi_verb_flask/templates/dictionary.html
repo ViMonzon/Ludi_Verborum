@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Dictionary</title>
+  </head>
+  <body>
+    <h1>My Dictionary</h1>
+    <table>
+      <tr>
+        <th>Word</th>
+      </tr>
+      {% for word in words %}
+        <tr>
+          <td>{{ word }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
