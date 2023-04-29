@@ -1,9 +1,11 @@
-import firebase_authentication as fb_auth
-from firebase_admin import firestore
+
 from firebase_admin import firestore
 from firebase_admin import credentials
+from firebase_admin import auth
 import firebase_admin
+from firebase_authentication import login
 import scrap_rae
+from unidecode import unidecode
 from user import User
 
 
@@ -16,18 +18,33 @@ class UserDAO:
     def __init__(self):
         self.db = firestore.client()
 
-    def create_user(self, email, password):        
-        fb_auth.create_user(email, password)
-        print(f'El usuario {email} se ha creado.')
-
+    def create_user(self, email, password):
+        try:
+            if self.find_user_by_email(email):
+                print('El usuario ya existe')
+                return False, 'El usuario ya existe'
+            user = auth.create_user(
+                email=email,
+                password=password
+            )
+            print('Successfully created new user: {0}'.format(user.email))
+            return True, None
+        except Exception as e:
+            print(f"Inicio de sesión fallido: {e} Email ya existe")
+            return False, str(e)
 
     def find_user_by_email(self, email):
         # Busca el usuario por email en Firebase Authentication
-        return fb_auth.get_user_by_email(email)
+        try:
+            user = auth.get_user_by_email(email)
+            return user
+        except Exception as e:
+            return None
 
     def authenticate_user(self, email, password):
-        # Autentica al usuario en Firebase Authentication
-        return fb_auth.login(email, password)
+    # Autentica al usuario en Firebase Authentication
+        return login(email, password)
+        
         
     def get_words(self,user_email, letter):
         db = firestore.client()
@@ -54,4 +71,4 @@ class UserDAO:
     def add_word_to_dic(self, user_email, word):
         word_f = scrap_rae.myword(word)
         db = firestore.client()
-        db.collection('users').document(user_email).collection("letter").document(word[0]).collection("word").document(word).set(word_f)
+        db.collection('users').document(user_email).collection("letter").document(unidecode(word[0])).collection("word").document(word).set(word_f)

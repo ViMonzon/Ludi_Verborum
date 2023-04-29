@@ -1,10 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, json, jsonify
 
-from markupsafe import escape
-
-from firebase_admin import firestore
-from firebase_admin import credentials
-import firebase_admin
 from flask_login import login_user, logout_user, login_required
 from flask_login import current_user
 from user import User
@@ -47,48 +42,50 @@ def load_user(user_id):
     return None
 """
 
-@app.route('/register', methods=['POST'])
-def create():
-    #email = request.json['email']
-    #password = request.json['password']
-
-    email = request.form['email']
-    password = request.form['password']
-    print(request.form)
-    user_dao.create_user(email, password)
-    print(f'El usuario {email} se ha creado.')
-    for word in default_words:
-        user_dao.add_word_to_dic(email, word)
+def authenticate_and_login_user(email, password):
     auth_result = user_dao.authenticate_user(email, password)
     if auth_result[0]:
         user = User(email)
         users.append(user)
         login_user(user)
         print(f'El usuario {email} se ha unido.')
-    return render_template('word.html')
+        return True
+    return False
 
+@app.route('/register', methods=['POST'])
+def create():
+    if 'email' not in request.json or 'password' not in request.json:
+        return "Error: faltan datos requeridos (email y/o password)", 400
+    email = request.json['email']
+    password = request.json['password']
+    print(request.json)
+    
+    if user_dao.create_user(email, password)[0]:
+        print(f'El usuario {email} se ha creado.')
+        for word in default_words:
+            user_dao.add_word_to_dic(email, word)
+    else:
+        return jsonify(["user alredy exist"])
+    if authenticate_and_login_user(email, password):
+        return jsonify(["Register success"])
+    else:
+        return jsonify(["Wrong Credentials"])
 
 @app.route('/login', methods=['POST'])
 def login():
-
-    #email = request.json['email'] 
-    #password = request.json['password']
-
-    email = request.form['email'] 
-    password = request.form['password']
-    auth_result = user_dao.authenticate_user(email, password)
-    if auth_result[0]:
-        user = User(email)
-        users.append(user)
-        login_user(user)
-        print(f'El usuario {email} se ha unido.')
+    if 'email' not in request.json or 'password' not in request.json:
+        return "Error: faltan datos requeridos (email y/o password)", 400
+    email = request.json['email']
+    password = request.json['password']
+    print(request.json)
+    if authenticate_and_login_user(email, password):
         try:
-            return render_template('word.html')
+            return jsonify([ "success"])
         except Exception as e:
             app.logger.error(str(e))
             return 'Error: ' + str(e), 500
     else:
-        return "Error: Email o password inválidos", 401
+        return jsonify(["Wrong Credentials"])
 
 @app.route('/', methods=['POST', 'GET'])
 def hello():
@@ -135,4 +132,4 @@ def logout():
 
 #PUERTO 5000 por defecto: http://localhost:5000/
 if __name__ == "__main__":
-    app.run()
+    app.run(threaded = True )
