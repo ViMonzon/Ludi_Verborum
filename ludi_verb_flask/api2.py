@@ -24,30 +24,20 @@ default_words = ['almendra', 'alondra', 'barco', 'casa', 'dedo', 'elefante', 'fl
 'león', 'mariposa', 'nido', 'oso', 'pájaro', 'quesadilla', 'rana', 'silla', 'tren', 'unicornio', 'vino', 'zapatilla']
 
 #Gestión de usuarios de Flask
+
+
 @login_manager.user_loader
 def load_user(user_id):
-    for user in users:
-        if user.get_id() == user_id:
-            return user
-    return None
-""""
-@login_manager.user_loader
-def load_user(user_id):
-    user_doc = user_dao.get_user(user_id)
-    if user_doc.exists:
-        user_data = user_doc.to_dict()
-        user = User(user_data['email'])
-        user.id = user_id
-        return user
-    return None
-"""
+    return User.get(user_id)
+
 
 def authenticate_and_login_user(email, password):
     auth_result = user_dao.authenticate_user(email, password)
     if auth_result[0]:
         user = User(email)
-        users.append(user)
-        login_user(user)
+        user.id = email
+        login_user(user, remember=True)
+        print(current_user.is_authenticated)
         print(f'El usuario {email} se ha unido.')
         return True
     return False
@@ -95,34 +85,49 @@ def hello():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
-@app.route('/dictionary', methods=['GET'])
-@login_required
-def list_dictionary():
-    if not current_user.is_authenticated:
-        return 'Usuario no autenticado', 401
-        
-    user_email = current_user.email
+@app.route('/dictionary', methods=['POST'])
+def list_dict():
+    user_email = request.json['email']
     try:
         words = user_dao.get_words(user_email)
         if words is not None:  # Verificar si words es None
-            return render_template('dictionary.html', words=words)
+            return jsonify('words')
         else:
-            return 'No hay palabras en la colección', 200
+            return 'No hay palabras en la colección', 400
     except Exception as e:
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
+
+@app.route('/game', methods=['POST'])
+def list_game():
+    user_email = request.json['email']
+    try:
+        words = user_dao.get_random_words(user_email)
+        if words is not None:  # Verificar si words es None
+            return jsonify(words)
+        else:
+            return 'No hay palabras en la colección', 400
+    except Exception as e:
+        app.logger.error(str(e))
+        return 'Error: ' + str(e), 500
+
 
 @app.route('/add', methods=['POST'])
 @login_required
 def add():
     if not current_user.is_authenticated:
         return 'Usuario no autenticado', 401
-    
-    #word = request.json['word']
-    word_f = request.form['word']
-    user_email = current_user.email   
-    user_dao.add_word_to_dic(user_email, word_f)
-    return render_template('word.html')
+    try:
+        word_f = request.json['word']
+        user_email = current_user.email   
+        user_dao.add_word_to_dic(user_email, word_f)
+        if word_f is not None:  # Verificar si words es None
+            return jsonify(word_f)
+        else:
+            return 'No hay palabra', 400
+    except Exception as e:
+        app.logger.error(str(e))
+        return 'Error: ' + str(e), 500
 
 @app.route('/logout')
 @login_required

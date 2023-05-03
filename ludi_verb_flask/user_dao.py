@@ -6,12 +6,13 @@ import firebase_admin
 from firebase_authentication import login
 import scrap_rae
 from unidecode import unidecode
-from user import User
+import random
 
 
 #Conexión con firebase
 cred = credentials.Certificate("serviceAccountKey.json")
 default_app = firebase_admin.initialize_app(cred)
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z']
 
 
 class UserDAO:
@@ -40,6 +41,17 @@ class UserDAO:
             return user
         except Exception as e:
             return None
+    
+    def get_user(self, uid):
+        # Código del método get_user
+        try:
+            user = auth.get_user(uid)
+            print(user)
+            print(uid)
+            return user
+        except Exception as e:
+            print(f"No se pudo encontrar al usuario con uid {uid}: {e}")
+            return None
 
     def authenticate_user(self, email, password):
     # Autentica al usuario en Firebase Authentication
@@ -59,7 +71,6 @@ class UserDAO:
     def get_words(self,user_email):
         db = firestore.client()
         letter_collection = db.collection('users').document(user_email).collection("letter")
-        letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z']
         words = []
         for letter in letters:
             word_collection = letter_collection.document(letter).collection("word").get()
@@ -72,3 +83,25 @@ class UserDAO:
         word_f = scrap_rae.myword(word)
         db = firestore.client()
         db.collection('users').document(user_email).collection("letter").document(unidecode(word[0])).collection("word").document(word).set(word_f)
+        return word_f
+
+    def get_random_words(self, user_email):
+        db = firestore.client()
+        word_list=[]
+        for letter in letters:
+            word_ref = db.collection('users').document(user_email).collection('letter').document(letter).collection('word').get()
+            if word_ref:
+                word_doc = random.choice(word_ref)
+                word = word_doc.id
+                definitions = word_doc.to_dict().get('definiciones', [])
+                if definitions:
+                    random_definition = random.choice(definitions)
+                    word_dict = {"palabra": word, "definicion": random_definition}
+                    word_list.append(word_dict)
+                    print(word_list)
+                else:
+                    print(f"No se encontraron definiciones para la palabra {word}.")
+            else:
+                print(f"No se encontraron palabras para la letra {letter}.")
+        print(word_list)
+        return word_list
