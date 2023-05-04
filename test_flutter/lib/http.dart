@@ -20,6 +20,8 @@ class HttpService {
 
   static var _gameUrl = Uri.parse('http://localhost:5000/game');
 
+  static var _addUrl = Uri.parse('http://localhost:5000/add');
+
   static var _logoutUrl = Uri.parse('http://localhost:5000/logout');
 
   static login(email, password, context) async {
@@ -79,10 +81,17 @@ class HttpService {
     }
   }
 
-  /*static Future<bool> logout() async {
-    SharedPreferences storage = await SharedPreferences.getInstance();
-    return true;
-  }*/
+  static add(email, word, context) async {
+    Map data = {'email': email, 'word': word};
+    http.Response response = await _client.post(_addUrl,
+        body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
+    if (response.statusCode == 200) {
+      await EasyLoading.showSuccess("Palabra añadida");
+    } else {
+      await EasyLoading.showError(
+          "Error Code : ${response.statusCode.toString()}");
+    }
+  }
 
   static Future<bool> logout() async {
     http.Response response = await _client

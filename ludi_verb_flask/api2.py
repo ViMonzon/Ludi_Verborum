@@ -113,13 +113,10 @@ def list_game():
 
 
 @app.route('/add', methods=['POST'])
-@login_required
-def add():
-    if not current_user.is_authenticated:
-        return 'Usuario no autenticado', 401
+def add(): 
     try:
+        user_email = request.json['email']
         word_f = request.json['word']
-        user_email = current_user.email   
         user_dao.add_word_to_dic(user_email, word_f)
         if word_f is not None:  # Verificar si words es None
             return jsonify(word_f)
