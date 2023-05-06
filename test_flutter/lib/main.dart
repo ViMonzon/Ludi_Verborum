@@ -9,7 +9,6 @@ import 'package:test_flutter/src/pages/game_page.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'src/pages/add_palabra.dart';
-import 'src/pages/opciones.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,8 +26,8 @@ class MyApp extends StatelessWidget {
           'home': (BuildContext context) => HomePage(),
           'juego': (BuildContext context) => GamePage(),
           'addPalabra': (BuildContext context) => addPalabra(),
-          'opcionesJuego': (BuildContext context) => opcionesJuego(),
-          //'dictionary': (BuildContext context) => DictionaryPage(),
+          //'opciones': (BuildContext context) => opcionesPage(),
+          'dictionary': (BuildContext context) => DictionaryPage(),
         },
         theme: ThemeData(primaryColor: Colors.deepPurple),
         builder: EasyLoading.init(),
