@@ -53,8 +53,10 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, 'opcionesJuego'),
-              child: Text('Opciones'),
+              onPressed: () async {
+                await HttpService.dictionary(bloc.email, context);
+              },
+              child: Text('Diccionario'),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0),

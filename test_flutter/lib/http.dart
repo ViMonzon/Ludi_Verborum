@@ -105,22 +105,21 @@ class HttpService {
     }
   }
 
-  /*static dictionary(email, context) async {
+  static dictionary(email, context) async {
     Map data = {'email': email};
     List<String> dictionary = [];
     http.Response response = await _client.post(_dictionaryUrl,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
-      for (var word in json) {
+      /*for (var word in json) {
         dictionary.add(word);
-      }
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => DictionaryPage()));
-      return dictionary;
+      }*/
+      Navigator.pushNamed(context, 'dictionary');
+      print("diccionario cargado");
     } else {
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");
     }
-  }*/
+  }
 }
