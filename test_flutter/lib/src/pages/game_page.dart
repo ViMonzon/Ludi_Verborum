@@ -4,16 +4,13 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import '../../http.dart';
+import '../bloc/provider.dart';
 import '../themes/constants.dart';
 
 class GamePage extends StatelessWidget {
   String _inputText = '';
   bool _showLabel = false;
-
-  void _onSendButtonPressed() {
-    // Lógica para enviar la información ingresada en _inputText
-    // aquí
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +22,36 @@ class GamePage extends StatelessWidget {
       'https://picsum.photos/300/400?random=5',
     ];
 
+    /*Lista de palabras del abecedario que luego mostramos en el swiper */
+    List<String> abc = [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z"
+    ];
+    final bloc = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Ludi Verborum'),
@@ -35,45 +62,58 @@ class GamePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 150.0),
+              /*Elemento swiper*/
               SizedBox(
-                height: 400.0, // Altura del Swiper
+                height: 100.0, // Altura del Swiper
                 child: Swiper(
+                  layout: SwiperLayout.STACK,
+                  itemWidth: 300.0,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      width: 200,
-                      height: 200,
+                    return Stack(
+                      children: <Widget>[
+                        Center(
+                          child: Image.network(
+                            "https://colourlex.com/wp-content/uploads/2017/04/Spinel-black-painted-swatch-47400-opt.jpg",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Center(
+                          child: Container(
+                            //width: 90,
+                            //height: 90,
+                            //color: Colors.white,
+                            child: Text("${abc[index]}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 50,
+                                  fontFamily: 'bangers',
+                                )),
+                          ),
+                        )
+                      ],
                     );
                   },
-                  itemCount: imageUrls.length, // Cantidad de tarjetas
-                  itemWidth: 200.0,
-                  itemHeight: 200.0,
-                  layout: SwiperLayout.DEFAULT,
-                  loop: true,
-                  duration: 125000,
-                  scrollDirection: Axis.horizontal,
+                  itemCount: abc.length,
+                  control: SwiperControl(),
                 ),
               ),
               SizedBox(height: 16.0),
+              /*Ellemento con la definición */
               Text(
                 'Definición',
                 style: TextStyle(fontSize: 24.0),
               ),
               SizedBox(height: 16.0),
+              /*Elemento que contiene el inputfield para meter la palabra*/
               TextField(
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   hintText: 'Introduce la solución',
                 ),
-                onChanged: (text) {
-                  /*setState(() {
-                    _inputText = text;
-                  });*/
-                },
+                onChanged: bloc.changePalabraJuego,
               ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: _onSendButtonPressed,
-                child: Text('Enviar palabra'),
-              ),
+              _botonEnviarPalabra(bloc),
               SizedBox(height: 16.0),
               if (_showLabel) // Muestra el label bajo ciertas condiciones
                 Text(
@@ -85,6 +125,21 @@ class GamePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _botonEnviarPalabra(LoginBloc bloc) {
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return ElevatedButton(
+        onPressed: () async {
+          await HttpService.game(bloc.email, context);
+        },
+        child: Text('Enviar palabra'),
+      );
+    });
+
+    // Lógica para enviar la información ingresada en _inputText
+    // aquí
   }
 
   /*@override
