@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, json, jsonify
+from flask import Flask, request, render_template, json, jsonify, redirect, url_for
 
 from flask_login import login_user, logout_user, login_required
 from flask_login import current_user
@@ -10,7 +10,7 @@ from user_dao import UserDAO, default_app
 
 user_dao = UserDAO()
 
-#Conexión con firebase
+# Conexión con firebase
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'bf117c9abb11f9e8e9fe07dc94ff7800'
 
@@ -19,11 +19,11 @@ login_manager.init_app(app)
 
 users = []
 default_words = ['almendra', 'alondra', 'barco', 'casa', 'dedo', 'elefante', 'flor', 'gato', 'helado', 'iglesia',
-'jardín', 'luna', 'manzana', 'nube', 'ojo', 'perro', 'queso', 'ratón', 'sol', 'tigre', 'uva', 'vaca',
-'zapato', 'árbol', 'boca', 'carro', 'diente', 'escalera', 'fuego', 'guitarra', 'hueso', 'isla', 'juego',
-'león', 'mariposa', 'nido', 'oso', 'pájaro', 'quesadilla', 'rana', 'silla', 'tren', 'unicornio', 'vino', 'zapatilla']
+                 'jardín', 'luna', 'manzana', 'nube', 'ojo', 'perro', 'queso', 'ratón', 'sol', 'tigre', 'uva', 'vaca',
+                 'zapato', 'árbol', 'boca', 'carro', 'diente', 'escalera', 'fuego', 'guitarra', 'hueso', 'isla', 'juego',
+                 'león', 'mariposa', 'nido', 'oso', 'pájaro', 'quesadilla', 'rana', 'silla', 'tren', 'unicornio', 'vino', 'zapatilla']
 
-#Gestión de usuarios de Flask
+# Gestión de usuarios de Flask
 
 
 @login_manager.user_loader
@@ -42,6 +42,7 @@ def authenticate_and_login_user(email, password):
         return True
     return False
 
+
 @app.route('/register', methods=['POST'])
 def create():
     if 'email' not in request.json or 'password' not in request.json:
@@ -49,7 +50,7 @@ def create():
     email = request.json['email']
     password = request.json['password']
     print(request.json)
-    
+
     if user_dao.create_user(email, password)[0]:
         print(f'El usuario {email} se ha creado.')
         for word in default_words:
@@ -61,6 +62,7 @@ def create():
     else:
         return jsonify(["Wrong Credentials"])
 
+
 @app.route('/login', methods=['POST'])
 def login():
     if 'email' not in request.json or 'password' not in request.json:
@@ -70,12 +72,13 @@ def login():
     print(request.json)
     if authenticate_and_login_user(email, password):
         try:
-            return jsonify([ "success"])
+            return jsonify(["success"])
         except Exception as e:
             app.logger.error(str(e))
             return 'Error: ' + str(e), 500
     else:
         return jsonify(["Wrong Credentials"])
+
 
 @app.route('/', methods=['POST', 'GET'])
 def hello():
@@ -84,6 +87,7 @@ def hello():
     except Exception as e:
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
+
 
 @app.route('/dictionary', methods=['POST'])
 def list_dict():
@@ -97,6 +101,7 @@ def list_dict():
     except Exception as e:
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
+
 
 @app.route('/game', methods=['POST'])
 def list_game():
@@ -113,7 +118,7 @@ def list_game():
 
 
 @app.route('/add', methods=['POST'])
-def add(): 
+def add():
     try:
         user_email = request.json['email']
         word_f = request.json['word']
@@ -126,12 +131,14 @@ def add():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
-@app.route('/logout')
+
+@app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
-    return f'Logout exitoso de (current_user.email)!'
+    return redirect(url_for('/login'))
 
-#PUERTO 5000 por defecto: http://localhost:5000/
+
+# PUERTO 5000 por defecto: http://localhost:5000/
 if __name__ == "__main__":
-    app.run(threaded = True )
+    app.run(threaded=True)

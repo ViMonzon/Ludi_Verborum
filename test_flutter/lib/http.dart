@@ -75,6 +75,7 @@ class HttpService {
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       //FALTA IMPLEMENTAR///####
+      print("Palabra añadida");
     } else {
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");
@@ -94,8 +95,10 @@ class HttpService {
   }
 
   static Future<bool> logout() async {
-    http.Response response = await _client
-        .post(_logoutUrl, headers: {'Content-Type': 'application/json'});
+    http.Response response = await _client.post(_logoutUrl, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    } /*headers: {'Content-Type': 'application/json'}*/);
     if (response.statusCode == 200) {
       // La sesión ha sido cerrada correctamente
       return true;

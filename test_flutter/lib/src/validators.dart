@@ -21,4 +21,14 @@ class Validators {
       sink.addError('Debe tener mas de 6 caracteres');
     }
   });
+
+  final validarPalabraJuego = StreamTransformer<String, String>.fromHandlers(
+      handleData: (palabraJuego, sink) {
+    final wordRegExp = RegExp(r'^[a-zA-Z]+$');
+    if (!wordRegExp.hasMatch(palabraJuego)) {
+      sink.add(palabraJuego);
+    } else {
+      sink.addError("Formato de palabra incorrecto");
+    }
+  });
 }
