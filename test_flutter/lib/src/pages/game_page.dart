@@ -113,6 +113,7 @@ class GamePage extends StatelessWidget {
                 ),
                 onChanged: bloc.changePalabraJuego,
               ),
+              SizedBox(height: 16.0),
               _botonEnviarPalabra(bloc),
               SizedBox(height: 16.0),
               if (_showLabel) // Muestra el label bajo ciertas condiciones
@@ -134,7 +135,16 @@ class GamePage extends StatelessWidget {
         onPressed: () async {
           await HttpService.game(bloc.email, context);
         },
-        child: Text('Enviar palabra'),
+        child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
+            child: Text('Enviar palabra')),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          elevation: 0.0,
+          backgroundColor: Colors.deepPurple,
+        ),
       );
     });
 
