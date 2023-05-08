@@ -71,11 +71,20 @@ class HttpService {
 
     http.Response response = await _client.post(_gameUrl,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
+    print(response.body);
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
-      //FALTA IMPLEMENTAR///####
-      print("Palabra añadida");
+      print("Este es el json" + jsonEncode(json));
+      print(json.runtimeType.toString());
+      print(json[0].runtimeType.toString());
+      print("ok");
+      List<String> palabras =
+          json.map((item) => item["palabra"]).toList().cast<String>();
+      List<String> definiciones =
+          json.map((item) => item["definicion"]).toList().cast<String>();
+
+      return [palabras, definiciones];
     } else {
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");

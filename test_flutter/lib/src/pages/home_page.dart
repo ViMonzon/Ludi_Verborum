@@ -29,7 +29,12 @@ class HomePage extends StatelessWidget {
             Container(child: Text('Hola ${bloc.email}')),
             SizedBox(height: 100),
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, 'juego'),
+              onPressed: () async {
+                var palabras_juego =
+                    await HttpService.game(bloc.email, context);
+                Navigator.pushNamed(context, 'juego',
+                    arguments: palabras_juego);
+              },
               child: Text('! A jugar!'),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
