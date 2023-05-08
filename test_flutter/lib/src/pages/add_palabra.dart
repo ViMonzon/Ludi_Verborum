@@ -41,7 +41,7 @@ class _AddPalabraState extends State<addPalabra> {
               controller: _palabraController,
             ),
             SizedBox(height: 16),
-            ElevatedButton(
+            /*ElevatedButton(
               onPressed: () async {
                 final palabra = _palabraController.text; // <-- agregado
                 EasyLoading.show();
@@ -49,7 +49,7 @@ class _AddPalabraState extends State<addPalabra> {
                 EasyLoading.dismiss();
               },
               child: Text('Añadir palabra'),
-            ),
+            ),*/
             SizedBox(height: 16),
             TextField(
               decoration: InputDecoration(
