@@ -11,21 +11,24 @@ import 'package:test_flutter/src/pages/home_page.dart';
 
 class HttpService {
   static final _client = http.Client();
+  static final localhost = "10.0.2.2";
 
-  static var _loginUrl = Uri.parse('http://localhost:5000/login');
+  static var _loginUrl = Uri.parse('http://' + localhost + ':5000/login');
 
-  static var _registerUrl = Uri.parse('http://localhost:5000/register');
+  static var _registerUrl = Uri.parse('http://' + localhost + ':5000/register');
 
-  static var _dictionaryUrl = Uri.parse('http://localhost:5000/dictionary');
+  static var _dictionaryUrl =
+      Uri.parse('http://' + localhost + ':5000/dictionary');
 
-  static var _gameUrl = Uri.parse('http://localhost:5000/game');
+  static var _gameUrl = Uri.parse('http://' + localhost + ':5000/game');
 
-  static var _addUrl = Uri.parse('http://localhost:5000/add');
+  static var _addUrl = Uri.parse('http://' + localhost + ':5000/add');
 
-  static var _logoutUrl = Uri.parse('http://localhost:5000/logout');
+  static var _logoutUrl = Uri.parse('http://' + localhost + ':5000/logout');
 
   static login(email, password, context) async {
     Map data = {'email': email, 'password': password};
+    print("envio " + email + "y" + password);
 
     http.Response response = await _client.post(_loginUrl,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});

@@ -47,11 +47,10 @@ class CustomCard extends StatelessWidget {
                 child: Text(
                   definicion,
                   style: TextStyle(
-                    color: secondaryTextColor,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Avenir',
-                    fontSize: 20,
-                  ),
+                      color: secondaryTextColor,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Avenir',
+                      fontSize: 15),
                   textAlign: TextAlign.left,
                   softWrap: true,
                 ),

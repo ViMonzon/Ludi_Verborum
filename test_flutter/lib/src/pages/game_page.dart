@@ -9,6 +9,7 @@ import '../themes/constants.dart';
 import '../widgets/card.dart';
 import '../widgets/custom_card.dart';
 import '../widgets/header_widget.dart';
+import '../widgets/timer_widget.dart';
 
 class GamePage extends StatelessWidget {
   const GamePage({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class GamePage extends StatelessWidget {
     List<String> palabras = palabras_def[0];
     List<String> deficiones = palabras_def[1];
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: gradientEndColor,
       body: Container(
         decoration: BoxDecoration(
@@ -28,12 +30,12 @@ class GamePage extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: const [0.1, 0.9])),
-        child: SafeArea(
+        child: Expanded(
             child: Column(
           children: <Widget>[
             const HeaderWidget(),
-            SizedBox(
-              height: 600,
+            TimerWidget(),
+            Expanded(
               child: Swiper(
                 itemCount: palabras.length,
                 itemWidth: MediaQuery.of(context).size.width,
@@ -45,7 +47,7 @@ class GamePage extends StatelessWidget {
                       Column(
                         children: [
                           const SizedBox(
-                            height: 100,
+                            height: 50,
                           ),
                           CustomCard(
                               inicial: removeDiacritics(
