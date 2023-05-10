@@ -56,8 +56,7 @@ class GamePage extends StatelessWidget {
                             height: 50,
                           ),*/
                           CustomCard(
-                              inicial: removeDiacritics(
-                                  palabras[index][0].toUpperCase()),
+                              palabra: palabras[index],
                               definicion: deficiones[index]),
                         ],
                       ),

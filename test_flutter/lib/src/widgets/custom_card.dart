@@ -1,13 +1,29 @@
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 
 import '../themes/constants.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomCard extends StatefulWidget {
   final String definicion;
-  final String inicial;
+  final String palabra;
 
-  const CustomCard({Key? key, required this.inicial, required this.definicion})
+  const CustomCard({Key? key, required this.palabra, required this.definicion})
       : super(key: key);
+
+  @override
+  _CustomCardState createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
+  String _respuesta = '';
+  late String _inicial;
+  Color _backgroundColor = Colors.white;
+
+  @override
+  void initState() {
+    super.initState();
+    _inicial = removeDiacritics(widget.palabra[0].toUpperCase());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +33,7 @@ class CustomCard extends StatelessWidget {
       child: Card(
         elevation: 8,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-        color: Colors.white,
+        color: _backgroundColor,
         child: Padding(
           padding: const EdgeInsets.all(34.0),
           child: Column(
@@ -25,7 +41,7 @@ class CustomCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                inicial,
+                _inicial,
                 style: TextStyle(
                     color: primaryTextColor,
                     fontWeight: FontWeight.w900,
@@ -47,7 +63,7 @@ class CustomCard extends StatelessWidget {
               ),
               Container(
                 child: Text(
-                  definicion,
+                  widget.definicion,
                   style: TextStyle(
                       color: secondaryTextColor,
                       fontWeight: FontWeight.w600,
@@ -68,7 +84,19 @@ class CustomCard extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Agrega aquí la lógica que deseas ejecutar cuando el usuario presione el botón.
+                  print('Valor de _respuesta: $_respuesta');
+                  print('Valor de widget.palabra: ${widget.palabra}');
+                  if (_respuesta == widget.palabra) {
+                    setState(() {
+                      _backgroundColor =
+                          Colors.green; // Actualizamos el color a verde
+                    });
+                  } else {
+                    setState(() {
+                      _backgroundColor =
+                          Colors.red; // Actualizamos el color a rojo
+                    });
+                  }
                 },
                 child: Text('Enviar'),
                 style: ElevatedButton.styleFrom(
