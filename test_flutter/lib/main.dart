@@ -25,11 +25,13 @@ class MyApp extends StatelessWidget {
           'login': (BuildContext context) => LoginPage(),
           'home': (BuildContext context) => HomePage(),
           'juego': (BuildContext context) => GamePage(),
-          'addPalabra': (BuildContext context) => addPalabra(),
+          'addPalabra': (BuildContext context) => AddPalabra(),
           //'opciones': (BuildContext context) => opcionesPage(),
           'dictionary': (BuildContext context) => DictionaryPage(),
         },
-        theme: ThemeData(primaryColor: Colors.deepPurple),
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
+        ),
         builder: EasyLoading.init(),
       ),
     );
