@@ -1,7 +1,6 @@
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/src/bloc/provider.dart';
-import 'package:test_flutter/src/widgets/header_widget_add.dart';
 
 import '../../http.dart';
 import '../themes/constants.dart';
@@ -108,18 +107,6 @@ class DictionaryPage extends StatelessWidget {
     final bloc = Provider.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Hola' /*${bloc.email}'*/,
-          /*Esto es lo que da error del valuestream*/
-          style: TextStyle(
-              color: titleTextColor,
-              fontSize: 24,
-              fontWeight: FontWeight.w400,
-              fontFamily: 'Avenir'),
-          textAlign: TextAlign.left,
-        ),
-      ),
       backgroundColor: gradientEndColor,
       body: Stack(
         children: [
