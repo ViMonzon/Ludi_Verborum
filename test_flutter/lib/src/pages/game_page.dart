@@ -34,7 +34,13 @@ class GamePage extends StatelessWidget {
             child: Column(
           children: <Widget>[
             const HeaderWidget(),
+            const SizedBox(
+              height: 15,
+            ),
             TimerWidget(),
+            const SizedBox(
+              height: 15,
+            ),
             Expanded(
               child: Swiper(
                 itemCount: palabras.length,
@@ -46,9 +52,9 @@ class GamePage extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          const SizedBox(
+                          /*const SizedBox(
                             height: 50,
-                          ),
+                          ),*/
                           CustomCard(
                               inicial: removeDiacritics(
                                   palabras[index][0].toUpperCase()),

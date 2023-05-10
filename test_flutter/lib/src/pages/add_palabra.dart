@@ -1,14 +1,40 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../http.dart';
 import '../bloc/provider.dart';
+import '../themes/constants.dart';
+import '../widgets/custom_card_add.dart';
+import '../widgets/header_widget_add.dart';
 
-class addPalabra extends StatefulWidget {
+class AddPalabra extends StatelessWidget {
   @override
-  _AddPalabraState createState() => _AddPalabraState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: gradientEndColor,
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [gradientStartColor, gradientEndColor],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [0.1, 0.9])),
+        child: Expanded(
+          child: Column(children: <Widget>[
+            const HeaderWidgetAdd(),
+            const SizedBox(
+              height: 50,
+            ),
+            CustomCardAdd(),
+          ]),
+        ),
+      ),
+    );
+  }
 }
-
+/*
 class _AddPalabraState extends State<addPalabra> {
   final _palabraController = TextEditingController();
 
@@ -66,4 +92,4 @@ class _AddPalabraState extends State<addPalabra> {
       ),
     );
   }
-}
+}*/

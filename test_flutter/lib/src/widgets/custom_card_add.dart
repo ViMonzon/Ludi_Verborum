@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../themes/constants.dart';
 
-class CustomCard extends StatelessWidget {
-  final String definicion;
-  final String inicial;
-
-  const CustomCard({Key? key, required this.inicial, required this.definicion})
-      : super(key: key);
+class CustomCardAdd extends StatelessWidget {
+  const CustomCardAdd({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Flexible(
       flex: 0,
-      fit: FlexFit.tight,
+      fit: FlexFit.loose,
       child: Card(
         elevation: 8,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
@@ -25,27 +21,27 @@ class CustomCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                inicial,
-                style: TextStyle(
-                    color: primaryTextColor,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'Avenir',
-                    fontSize: 50),
-                textAlign: TextAlign.left,
-              ),
-              Text(
-                "Definicion",
+                "Introduce tu palabra: ",
                 style: TextStyle(
                     color: primaryTextColor,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Avenir',
-                    fontSize: 28),
+                    fontSize: 24),
                 textAlign: TextAlign.left,
               ),
               const SizedBox(
                 height: 24,
               ),
-              Container(
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                      hintText: 'Ingresa tu palabra',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8))),
+                ),
+              ),
+              /*Container(
                 child: Text(
                   definicion,
                   style: TextStyle(
@@ -56,21 +52,15 @@ class CustomCard extends StatelessWidget {
                   textAlign: TextAlign.left,
                   softWrap: true,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Ingresa tu respuesta',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8))),
-                ),
+              ),*/
+              const SizedBox(
+                height: 24,
               ),
               ElevatedButton(
                 onPressed: () {
                   // Agrega aquí la lógica que deseas ejecutar cuando el usuario presione el botón.
                 },
-                child: Text('Enviar'),
+                child: Text('Añadir'),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
