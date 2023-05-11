@@ -8,13 +8,13 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(26.0),
+      padding: const EdgeInsets.only(top: 30.0, left: 26.0, right: 26.0),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           "¡A JUGAR!",
           style: TextStyle(
               color: titleTextColor,
-              fontSize: 40,
+              fontSize: 30,
               fontWeight: FontWeight.w900,
               fontFamily: 'Avenir'),
           textAlign: TextAlign.left,

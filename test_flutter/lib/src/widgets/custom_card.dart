@@ -6,30 +6,46 @@ import '../themes/constants.dart';
 class CustomCard extends StatefulWidget {
   final String definicion;
   final String palabra;
+  final VoidCallback eliminarTarjeta;
 
-  const CustomCard({Key? key, required this.palabra, required this.definicion})
-      : super(key: key);
+  const CustomCard({
+    Key? key,
+    required this.palabra,
+    required this.definicion,
+    required this.eliminarTarjeta,
+  }) : super(key: key);
 
   @override
   _CustomCardState createState() => _CustomCardState();
 }
 
-class _CustomCardState extends State<CustomCard> {
+class _CustomCardState extends State<CustomCard>
+    with SingleTickerProviderStateMixin {
   String _respuesta = '';
   late String _inicial;
+  bool _isVisible = true;
   Color _backgroundColor = Colors.white;
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
 
   @override
   void initState() {
     super.initState();
     _inicial = removeDiacritics(widget.palabra[0].toUpperCase());
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
+    _animation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(0.0, 1.0),
+    ).animate(_controller);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      flex: 0,
-      fit: FlexFit.tight,
+    return SlideTransition(
+      position: _animation,
       child: Card(
         elevation: 8,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
@@ -80,13 +96,19 @@ class _CustomCardState extends State<CustomCard> {
                       hintText: 'Ingresa tu respuesta',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8))),
+                  onChanged: (value) {
+                    setState(() {
+                      _respuesta = value;
+                    });
+                  },
                 ),
               ),
               ElevatedButton(
                 onPressed: () {
                   print('Valor de _respuesta: $_respuesta');
                   print('Valor de widget.palabra: ${widget.palabra}');
-                  if (_respuesta == widget.palabra) {
+                  if (removeDiacritics(_respuesta.toLowerCase()) ==
+                      removeDiacritics(widget.palabra.toLowerCase())) {
                     setState(() {
                       _backgroundColor =
                           Colors.green; // Actualizamos el color a verde
@@ -97,6 +119,9 @@ class _CustomCardState extends State<CustomCard> {
                           Colors.red; // Actualizamos el color a rojo
                     });
                   }
+                  setState(() {
+                    _controller.forward().whenComplete(widget.eliminarTarjeta);
+                  });
                 },
                 child: Text('Enviar'),
                 style: ElevatedButton.styleFrom(
@@ -112,5 +137,11 @@ class _CustomCardState extends State<CustomCard> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

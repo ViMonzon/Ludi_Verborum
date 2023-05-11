@@ -49,17 +49,26 @@ class _TimerWidgetState extends State<TimerWidget> {
     return Stack(
       children: [
         Center(
+            child: Container(
+          width: 100,
+          height: 100,
           child: CircularProgressIndicator(
             value: progress,
             backgroundColor: Colors.grey[300],
             valueColor: AlwaysStoppedAnimation<Color>(secondaryTextColor),
             strokeWidth: 10,
           ),
-        ),
-        Center(
-          child: Text(
-            '$_seconds segundos',
-            style: Theme.of(context).textTheme.headline6,
+        )),
+        Positioned.fill(
+          child: Center(
+            child: Text(
+              '$_seconds',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
       ],
