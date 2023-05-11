@@ -11,15 +11,40 @@ import '../widgets/custom_card.dart';
 import '../widgets/header_widget.dart';
 import '../widgets/timer_widget.dart';
 
-class GamePage extends StatelessWidget {
-  const GamePage({Key? key}) : super(key: key);
+class GamePage extends StatefulWidget {
+  @override
+  _GamePageState createState() => _GamePageState();
+}
+
+class _GamePageState extends State<GamePage> {
+  List<String> palabras = [];
+  List<String> definiciones = [];
+  int contador = 0;
+  final SwiperController _swiperController = SwiperController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void eliminarTarjeta(int index) {
+    final int currentPos = _swiperController.index;
+    setState(() {
+      palabras.removeAt(index);
+      definiciones.removeAt(index);
+      contador++;
+    });
+    if (_swiperController.index == currentPos) {
+      _swiperController.next();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     List<List<String>> palabras_def =
         ModalRoute.of(context)!.settings.arguments as List<List<String>>;
-    List<String> palabras = palabras_def[0];
-    List<String> deficiones = palabras_def[1];
+    palabras = palabras_def[0];
+    definiciones = palabras_def[1];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: gradientEndColor,
@@ -34,15 +59,13 @@ class GamePage extends StatelessWidget {
             child: Column(
           children: <Widget>[
             const HeaderWidget(),
-            const SizedBox(
-              height: 15,
-            ),
-            TimerWidget(),
-            const SizedBox(
-              height: 15,
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              child: TimerWidget(),
             ),
             Expanded(
               child: Swiper(
+                controller: _swiperController,
                 itemCount: palabras.length,
                 itemWidth: MediaQuery.of(context).size.width,
                 itemHeight: MediaQuery.of(context).size.height,
@@ -56,8 +79,10 @@ class GamePage extends StatelessWidget {
                             height: 50,
                           ),*/
                           CustomCard(
-                              palabra: palabras[index],
-                              definicion: deficiones[index]),
+                            palabra: palabras[index],
+                            definicion: definiciones[index],
+                            eliminarTarjeta: () => eliminarTarjeta(index),
+                          ),
                         ],
                       ),
                     ],
