@@ -8,6 +8,8 @@ class CustomCard extends StatefulWidget {
   final String palabra;
   final VoidCallback eliminarTarjeta;
   final VoidCallback moverSiguiente;
+  final VoidCallback sumarAcierto;
+  final VoidCallback sumarFallo;
 
   const CustomCard({
     Key? key,
@@ -15,6 +17,8 @@ class CustomCard extends StatefulWidget {
     required this.definicion,
     required this.eliminarTarjeta,
     required this.moverSiguiente,
+    required this.sumarAcierto,
+    required this.sumarFallo,
   }) : super(key: key);
 
   @override
@@ -115,11 +119,13 @@ class _CustomCardState extends State<CustomCard>
                       _backgroundColor =
                           Colors.green; // Actualizamos el color a verde
                     });
+                    widget.sumarAcierto;
                   } else {
                     setState(() {
                       _backgroundColor =
                           Colors.red; // Actualizamos el color a rojo
                     });
+                    widget.sumarFallo;
                   }
                   setState(() {
                     widget.eliminarTarjeta;

@@ -1,110 +1,30 @@
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:test_flutter/src/bloc/provider.dart';
 
 import '../../http.dart';
 import '../themes/constants.dart';
 
-class DictionaryPage extends StatelessWidget {
-  final List<String> lista = [
-    'almendra',
-    'alondra',
-    'barco',
-    'casa',
-    'dedo',
-    'elefante',
-    'flor',
-    'gato',
-    'helado',
-    'iglesia',
-    'jardín',
-    'luna',
-    'manzana',
-    'nube',
-    'ojo',
-    'perro',
-    'queso',
-    'ratón',
-    'sol',
-    'tigre',
-    'uva',
-    'vaca',
-    'zapato',
-    'árbol',
-    'boca',
-    'carro',
-    'diente',
-    'escalera',
-    'fuego',
-    'guitarra',
-    'hueso',
-    'isla',
-    'juego',
-    'león',
-    'mariposa',
-    'nido',
-    'oso',
-    'pájaro',
-    'quesadilla',
-    'rana',
-    'silla',
-    'tren',
-    'unicornio',
-    'vino',
-    'zapatilla'
-  ];
-  final List<String> defs = [
-    'almendra',
-    'alondra',
-    'barco',
-    'casa',
-    'dedo',
-    'elefante',
-    'flor',
-    'gato',
-    'helado',
-    'iglesia',
-    'jardín',
-    'luna',
-    'manzana',
-    'nube',
-    'ojo',
-    'perro',
-    'queso',
-    'ratón',
-    'sol',
-    'tigre',
-    'uva',
-    'vaca',
-    'zapato',
-    'árbol',
-    'boca',
-    'carro',
-    'diente',
-    'escalera',
-    'fuego',
-    'guitarra',
-    'hueso',
-    'isla',
-    'juego',
-    'león',
-    'mariposa',
-    'nido',
-    'oso',
-    'pájaro',
-    'quesadilla',
-    'rana',
-    'silla',
-    'tren',
-    'unicornio',
-    'vino',
-    'zapatilla'
-  ];
+class DictionaryPage extends StatefulWidget {
+  @override
+  _DictionaryPageState createState() => _DictionaryPageState();
+}
+
+class _DictionaryPageState extends State<DictionaryPage> {
+  List<String> definiciones = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bloc = Provider.of(context);
+    List<String> palabras =
+        ModalRoute.of(context)!.settings.arguments as List<String>;
 
     return Scaffold(
       backgroundColor: gradientEndColor,
@@ -118,36 +38,46 @@ class DictionaryPage extends StatelessWidget {
                     end: Alignment.bottomCenter,
                     stops: const [0.1, 0.9])),
             child: ListView.builder(
-              itemCount: lista.length,
+              itemCount: palabras.length,
               itemBuilder: (BuildContext context, int index) {
                 String inicial =
-                    removeDiacritics(lista[index][0].toUpperCase());
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: secondaryTextColor,
-                    child: Text(
-                      inicial,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Avenir'),
+                    removeDiacritics(palabras[index][0].toUpperCase());
+                return Dismissible(
+                  key: ValueKey(palabras[index].toString()),
+                  background: Container(
+                    color: Colors.redAccent,
+                    child: Icon(Icons.delete, color: Colors.white, size: 40),
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                  ),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    HttpService.delete(
+                        bloc.email, palabras[index].toString(), context);
+                  },
+                  child: Card(
+                    color: Colors.white,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: primaryTextColor,
+                        child: Text(
+                          inicial,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Avenir'),
+                        ),
+                      ),
+                      title: Text(
+                        palabras[index],
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Avenir'),
+                      ),
                     ),
                   ),
-                  title: Text(
-                    lista[index],
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Avenir'),
-                  ),
-                  subtitle: Text(defs[index],
-                      style: TextStyle(
-                          color: Colors.grey[900],
-                          fontSize: 20,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: 'Avenir')),
                 );
               },
             ),

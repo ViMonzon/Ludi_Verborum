@@ -19,7 +19,8 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   List<String> palabras = [];
   List<String> definiciones = [];
-  int contador = 0;
+  int contadorAcierto = 0;
+  int contadorFallo = 0;
   final SwiperController _swiperController = SwiperController();
 
   @override
@@ -30,15 +31,20 @@ class _GamePageState extends State<GamePage> {
   void eliminarTarjeta(int index) {
     setState(() {
       palabras.removeAt(index);
-      print(index);
       definiciones.removeAt(index);
-      print(index);
-      contador++;
     });
   }
 
   void moverSiguiente() {
     _swiperController.next();
+  }
+
+  void sumarAcierto() {
+    contadorAcierto++;
+  }
+
+  void sumarFallo() {
+    contadorFallo++;
   }
 
   @override
@@ -85,6 +91,8 @@ class _GamePageState extends State<GamePage> {
                             definicion: definiciones[index],
                             eliminarTarjeta: () => eliminarTarjeta(index),
                             moverSiguiente: () => moverSiguiente(),
+                            sumarAcierto: () => sumarAcierto(),
+                            sumarFallo: () => sumarFallo(),
                           ),
                         ],
                       ),

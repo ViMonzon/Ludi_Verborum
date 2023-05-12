@@ -85,6 +85,10 @@ class UserDAO:
         db.collection('users').document(user_email).collection("letter").document(unidecode(word[0])).collection("word").document(word).set(word_f)
         return word_f
 
+    def delete_word_to_dic(self, user_email, word):
+        db = firestore.client()
+        db.collection('users').document(user_email).collection("letter").document(unidecode(word[0])).collection("word").document(word).delete()
+
     def get_random_words(self, user_email):
         db = firestore.client()
         word_list=[]

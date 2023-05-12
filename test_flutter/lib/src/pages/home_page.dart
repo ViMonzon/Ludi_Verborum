@@ -266,7 +266,10 @@ _crearLabelLogout(BuildContext context){
           GestureDetector(
             child: _crearBotonDiccionario(context, bloc),
             onTap: () async {
-              await HttpService.dictionary(bloc.email, context);
+              var palabras_dict =
+                  await HttpService.dictionary(bloc.email, context);
+              Navigator.pushNamed(context, 'dictionary',
+                  arguments: palabras_dict);
             },
           ),
         ]),
@@ -342,7 +345,8 @@ _crearLabelLogout(BuildContext context){
 
     return ElevatedButton(
       onPressed: () async {
-        await HttpService.dictionary(bloc.email, context);
+        var palabras_dict = await HttpService.dictionary(bloc.email, context);
+        Navigator.pushNamed(context, 'dictionary', arguments: palabras_dict);
       },
       child: Text(
         'Diccionario',
