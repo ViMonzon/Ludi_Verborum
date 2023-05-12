@@ -23,6 +23,7 @@ class HttpService {
   static var _gameUrl = Uri.parse('http://' + localhost + ':5000/game');
 
   static var _addUrl = Uri.parse('http://' + localhost + ':5000/add');
+  static var _deleteUrl = Uri.parse('http://' + localhost + ':5000/delete');
 
   static var _logoutUrl = Uri.parse('http://' + localhost + ':5000/logout');
 
@@ -99,7 +100,19 @@ class HttpService {
     http.Response response = await _client.post(_addUrl,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
-      await EasyLoading.showSuccess("Palabra añadida");
+      await EasyLoading.showSuccess("Palabra " + word + " añadida");
+    } else {
+      await EasyLoading.showError(
+          "Error Code : ${response.statusCode.toString()}");
+    }
+  }
+
+  static delete(email, word, context) async {
+    Map data = {'email': email, 'word': word};
+    http.Response response = await _client.post(_deleteUrl,
+        body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
+    if (response.statusCode == 200) {
+      await EasyLoading.showSuccess("Palabra" + word + "borrada");
     } else {
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");
@@ -122,16 +135,16 @@ class HttpService {
 
   static dictionary(email, context) async {
     Map data = {'email': email};
-    List<String> dictionary = [];
     http.Response response = await _client.post(_dictionaryUrl,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
-      /*for (var word in json) {
-        dictionary.add(word);
-      }*/
-      Navigator.pushNamed(context, 'dictionary');
-      print("diccionario cargado");
+      print("Este es el json" + jsonEncode(json));
+      print(json.runtimeType.toString());
+      print(json[0].runtimeType.toString());
+      print("ok");
+      List<String> palabras = List<String>.from(json).cast<String>();
+      return palabras;
     } else {
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");

@@ -95,7 +95,7 @@ def list_dict():
     try:
         words = user_dao.get_words(user_email)
         if words is not None:  # Verificar si words es None
-            return jsonify('words')
+            return jsonify(words)
         else:
             return 'No hay palabras en la colección', 400
     except Exception as e:
@@ -131,6 +131,20 @@ def add():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
+@app.route('/delete', methods=['POST'])
+def delete():
+    try:
+        user_email = request.json['email']
+        word_f = request.json['word']
+        user_dao.delete_word_to_dic(user_email, word_f)
+        if word_f is not None:  # Verificar si words es None
+            return 'Palabra borrada', 200
+        else:
+            return 'No hay palabra', 400
+    except Exception as e:
+        app.logger.error(str(e))
+        return 'Error: ' + str(e), 500
+    
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
