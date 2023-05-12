@@ -7,12 +7,14 @@ class CustomCard extends StatefulWidget {
   final String definicion;
   final String palabra;
   final VoidCallback eliminarTarjeta;
+  final VoidCallback moverSiguiente;
 
   const CustomCard({
     Key? key,
     required this.palabra,
     required this.definicion,
     required this.eliminarTarjeta,
+    required this.moverSiguiente,
   }) : super(key: key);
 
   @override
@@ -120,7 +122,8 @@ class _CustomCardState extends State<CustomCard>
                     });
                   }
                   setState(() {
-                    _controller.forward().whenComplete(widget.eliminarTarjeta);
+                    widget.eliminarTarjeta;
+                    _controller.forward().whenComplete(widget.moverSiguiente);
                   });
                 },
                 child: Text('Enviar'),

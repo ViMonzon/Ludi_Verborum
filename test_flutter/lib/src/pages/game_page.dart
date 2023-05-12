@@ -28,15 +28,17 @@ class _GamePageState extends State<GamePage> {
   }
 
   void eliminarTarjeta(int index) {
-    final int currentPos = _swiperController.index;
     setState(() {
       palabras.removeAt(index);
+      print(index);
       definiciones.removeAt(index);
+      print(index);
       contador++;
     });
-    if (_swiperController.index == currentPos) {
-      _swiperController.next();
-    }
+  }
+
+  void moverSiguiente() {
+    _swiperController.next();
   }
 
   @override
@@ -71,7 +73,7 @@ class _GamePageState extends State<GamePage> {
                 itemHeight: MediaQuery.of(context).size.height,
                 layout: SwiperLayout.TINDER,
                 itemBuilder: (context, index) {
-                  return Stack(
+                  return IndexedStack(
                     children: [
                       Column(
                         children: [
@@ -82,6 +84,7 @@ class _GamePageState extends State<GamePage> {
                             palabra: palabras[index],
                             definicion: definiciones[index],
                             eliminarTarjeta: () => eliminarTarjeta(index),
+                            moverSiguiente: () => moverSiguiente(),
                           ),
                         ],
                       ),
