@@ -21,7 +21,6 @@ class _DictionaryPageState extends State<DictionaryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final bloc = Provider.of(context);
     List<String> palabras =
         ModalRoute.of(context)!.settings.arguments as List<String>;

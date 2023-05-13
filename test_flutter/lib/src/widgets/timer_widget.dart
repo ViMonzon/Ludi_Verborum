@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import '../themes/constants.dart';
 
 class TimerWidget extends StatefulWidget {
-  const TimerWidget({Key? key}) : super(key: key);
+  final VoidCallback onTimerFinish;
+  const TimerWidget({Key? key, required this.onTimerFinish}) : super(key: key);
 
   @override
   _TimerWidgetState createState() => _TimerWidgetState();
@@ -13,7 +14,7 @@ class TimerWidget extends StatefulWidget {
 
 class _TimerWidgetState extends State<TimerWidget> {
   late Timer _timer;
-  int _seconds = 120;
+  int _seconds = 30;
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _TimerWidgetState extends State<TimerWidget> {
       (timer) {
         if (_seconds == 0) {
           timer.cancel();
+          widget.onTimerFinish(); // llamada a la función de callback
         } else {
           setState(() {
             _seconds--;

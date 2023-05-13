@@ -11,6 +11,7 @@ import '../widgets/header_widget_add.dart';
 class AddPalabra extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: gradientEndColor,
