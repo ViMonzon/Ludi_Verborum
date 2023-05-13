@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
+import 'package:test_flutter/src/pages/score_page.dart';
 
 import '../model/word.dart';
 
@@ -40,11 +41,15 @@ class _GamePageState extends State<GamePage> {
   }
 
   void sumarAcierto() {
-    contadorAcierto++;
+    setState(() {
+      contadorAcierto++;
+    });
   }
 
   void sumarFallo() {
-    contadorFallo++;
+    setState(() {
+      contadorFallo++;
+    });
   }
 
   @override
@@ -69,7 +74,16 @@ class _GamePageState extends State<GamePage> {
             const HeaderWidget(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
-              child: TimerWidget(),
+              child: TimerWidget(
+                onTimerFinish: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScorePage(
+                            aciertos: contadorAcierto, fallos: contadorFallo)),
+                  );
+                },
+              ),
             ),
             Expanded(
               child: Swiper(

@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import '../../http.dart';
+import '../bloc/provider.dart';
 import '../themes/constants.dart';
 
-class CustomCardAdd extends StatelessWidget {
+class CustomCardAdd extends StatefulWidget {
   const CustomCardAdd({Key? key}) : super(key: key);
 
   @override
+  _CustomCardAddState createState() => _CustomCardAddState();
+}
+
+class _CustomCardAddState extends State<CustomCardAdd> {
+  final _palabraController = TextEditingController();
+
+  @override
+  void dispose() {
+    _palabraController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
     return Flexible(
       flex: 0,
       fit: FlexFit.loose,
@@ -35,6 +52,7 @@ class CustomCardAdd extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: TextField(
+                  controller: _palabraController,
                   decoration: InputDecoration(
                       hintText: 'Ingresa tu palabra',
                       border: OutlineInputBorder(
@@ -57,8 +75,11 @@ class CustomCardAdd extends StatelessWidget {
                 height: 24,
               ),
               ElevatedButton(
-                onPressed: () {
-                  // Agrega aquí la lógica que deseas ejecutar cuando el usuario presione el botón.
+                onPressed: () async {
+                  final palabra = _palabraController.text; // <-- agregado
+                  EasyLoading.show();
+                  await HttpService.add(bloc.email, palabra, context);
+                  EasyLoading.dismiss();
                 },
                 child: Text('Añadir'),
                 style: ElevatedButton.styleFrom(
