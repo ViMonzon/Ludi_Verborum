@@ -110,9 +110,10 @@ class HomePage extends StatelessWidget {
         ]),
         TableRow(children: [
           GestureDetector(
-            child: _crearLabelLogout(context),
+            child: _crearBoton("Logout", context, bloc),
             onTap: () async {
-              Navigator.pushNamed(context, 'Login');
+              bloc.dispose();
+              Navigator.pushNamed(context, 'login');
             },
           ),
         ]),
@@ -130,29 +131,6 @@ class HomePage extends StatelessWidget {
             fontSize: 30,
             fontWeight: FontWeight.w900,
             fontFamily: 'Avenir'),
-      ),
-    );
-  }
-
-  Widget _crearLabelLogout(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () async {
-        Navigator.pushNamed(context, 'Login');
-      },
-      child: Text(
-        'Logout',
-        style: TextStyle(
-            color: secondaryTextColor,
-            fontWeight: FontWeight.w400,
-            fontFamily: 'Avenir',
-            fontSize: 28),
-      ),
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        elevation: 8.0,
-        backgroundColor: gradientStartColor,
       ),
     );
   }

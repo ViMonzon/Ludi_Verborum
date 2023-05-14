@@ -24,9 +24,7 @@ class _CustomCardAddState extends State<CustomCardAdd> {
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of(context);
-    return Flexible(
-      flex: 0,
-      fit: FlexFit.loose,
+    return Container(
       child: Card(
         elevation: 8,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
@@ -59,18 +57,6 @@ class _CustomCardAddState extends State<CustomCardAdd> {
                           borderRadius: BorderRadius.circular(8))),
                 ),
               ),
-              /*Container(
-                child: Text(
-                  definicion,
-                  style: TextStyle(
-                      color: secondaryTextColor,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Avenir',
-                      fontSize: 15),
-                  textAlign: TextAlign.left,
-                  softWrap: true,
-                ),
-              ),*/
               const SizedBox(
                 height: 24,
               ),

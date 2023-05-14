@@ -22,7 +22,7 @@ class AddPalabra extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: const [0.1, 0.9])),
-        child: Expanded(
+        child: Container(
           child: Column(children: <Widget>[
             const HeaderWidgetAdd(),
             const SizedBox(
