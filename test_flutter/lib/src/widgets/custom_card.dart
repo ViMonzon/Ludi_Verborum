@@ -128,8 +128,8 @@ class _CustomCardState extends State<CustomCard>
                     widget.sumarFallo;
                   }
                   setState(() {
-                    widget.eliminarTarjeta;
                     _controller.forward().whenComplete(widget.moverSiguiente);
+                    widget.eliminarTarjeta;
                   });
                 },
                 child: Text('Enviar'),

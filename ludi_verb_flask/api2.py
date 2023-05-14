@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, json, jsonify, redirect, url_for
+from flask_jwt_extended import JWTManager, create_access_token
 
 from flask_login import login_user, logout_user, login_required
 from flask_login import current_user
@@ -14,6 +15,7 @@ user_dao = UserDAO()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'bf117c9abb11f9e8e9fe07dc94ff7800'
 
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -22,6 +24,7 @@ default_words = ['almendra', 'alondra', 'barco', 'casa', 'dedo', 'elefante', 'fl
                  'jardín', 'luna', 'manzana', 'nube', 'ojo', 'perro', 'queso', 'ratón', 'sol', 'tigre', 'uva', 'vaca',
                  'zapato', 'árbol', 'boca', 'carro', 'diente', 'escalera', 'fuego', 'guitarra', 'hueso', 'isla', 'juego',
                  'león', 'mariposa', 'nido', 'oso', 'pájaro', 'quesadilla', 'rana', 'silla', 'tren', 'unicornio', 'vino', 'zapatilla']
+
 
 # Gestión de usuarios de Flask
 
@@ -131,6 +134,7 @@ def add():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
+
 @app.route('/delete', methods=['POST'])
 def delete():
     try:
@@ -144,7 +148,7 @@ def delete():
     except Exception as e:
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
-    
+
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required

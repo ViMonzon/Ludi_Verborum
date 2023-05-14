@@ -7,6 +7,7 @@ import '../model/word.dart';
 
 import '../themes/constants.dart';
 
+import '../themes/customs.dart';
 import '../widgets/card.dart';
 import '../widgets/custom_card.dart';
 import '../widgets/header_widget.dart';
@@ -29,7 +30,11 @@ class _GamePageState extends State<GamePage> {
     super.initState();
   }
 
-  void eliminarTarjeta(int index) {
+  Future eliminarTarjeta(index) async {
+    if (palabras.isEmpty && definiciones.isEmpty) return;
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
     setState(() {
       palabras.removeAt(index);
       definiciones.removeAt(index);
@@ -71,6 +76,7 @@ class _GamePageState extends State<GamePage> {
         child: Expanded(
             child: Column(
           children: <Widget>[
+            /*crearFondo(context),*/
             const HeaderWidget(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
