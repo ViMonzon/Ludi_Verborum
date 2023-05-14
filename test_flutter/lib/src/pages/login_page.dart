@@ -149,16 +149,6 @@ class LoginPage extends StatelessWidget {
         });
   }
 
-/*
-  _login(LoginBloc bloc, BuildContext context) {
-    print('=====================');
-    print('Email: ${bloc.email}');
-    print('Password: ${bloc.password} ');
-    print('=====================');
-
-    Navigator.pushReplacementNamed(context, 'home');
-  }
-*/
   Widget _crearFondo(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
