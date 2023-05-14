@@ -23,7 +23,6 @@ class _GamePageState extends State<GamePage> {
   int contadorAcierto = 0;
   int contadorFallo = 0;
   final SwiperController _swiperController = SwiperController();
-  int currentIndex = 0;
 
   @override
   void didChangeDependencies() {
@@ -40,15 +39,9 @@ class _GamePageState extends State<GamePage> {
   }
 
   void eliminarTarjeta(int index) {
-    _swiperController.next();
-    // esperar un momento para permitir que la animación de movimiento termine
-    Future.delayed(Duration(milliseconds: 500), () {
-      // eliminar la tarjeta actual del array
-      setState(() {
-        palabras.removeAt(index);
-        definiciones.removeAt(index);
-      });
-      setState(() {});
+    setState(() {
+      palabras.removeAt(index);
+      definiciones.removeAt(index);
     });
   }
 
@@ -96,32 +89,36 @@ class _GamePageState extends State<GamePage> {
               ),
             ),
             Expanded(
-              child: Swiper(
-                controller: _swiperController,
-                itemCount: palabras.length,
-                itemWidth: MediaQuery.of(context).size.width,
-                itemHeight: MediaQuery.of(context).size.height,
-                layout: SwiperLayout.TINDER,
-                itemBuilder: (context, index) {
-                  return IndexedStack(
-                    children: [
-                      Column(
-                        children: [
-                          /*const SizedBox(
-                            height: 50,
-                          ),*/
-                          CustomCard(
-                            palabra: palabras[index],
-                            definicion: definiciones[index],
-                            eliminarTarjeta: () => eliminarTarjeta(index),
-                            sumarAcierto: () => sumarAcierto(),
-                            sumarFallo: () => sumarFallo(),
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                },
+              child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height,
+                  maxWidth: MediaQuery.of(context).size.width,
+                ),
+                child: Swiper(
+                  controller: _swiperController,
+                  itemCount: palabras.length,
+                  itemWidth: MediaQuery.of(context).size.width,
+                  itemHeight: MediaQuery.of(context).size.height,
+                  layout: SwiperLayout.TINDER,
+                  itemBuilder: (context, index) {
+                    return IndexedStack(
+                      children: [
+                        Column(
+                          children: [
+                            CustomCard(
+                              key: Key(palabras[index]),
+                              palabra: palabras[index],
+                              definicion: definiciones[index],
+                              eliminarTarjeta: () => eliminarTarjeta(index),
+                              sumarAcierto: () => sumarAcierto(),
+                              sumarFallo: () => sumarFallo(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             )
           ],

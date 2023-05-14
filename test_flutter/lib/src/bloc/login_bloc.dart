@@ -30,6 +30,8 @@ class LoginBloc with Validators {
   String get palabraJuego => _palabraJuegoController.value;
 
   dispose() {
+    changeEmail('');
+    changePassword('');
     _emailController.close();
     _passController.close();
   }
