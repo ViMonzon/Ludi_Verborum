@@ -23,6 +23,16 @@ class _GamePageState extends State<GamePage> {
   int contadorAcierto = 0;
   int contadorFallo = 0;
   final SwiperController _swiperController = SwiperController();
+  int currentIndex = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    List<List<String>> palabras_def =
+        ModalRoute.of(context)!.settings.arguments as List<List<String>>;
+    palabras = palabras_def[0];
+    definiciones = palabras_def[1];
+  }
 
   @override
   void initState() {
@@ -30,34 +40,34 @@ class _GamePageState extends State<GamePage> {
   }
 
   void eliminarTarjeta(int index) {
-    setState(() {
-      palabras.removeAt(index);
-      definiciones.removeAt(index);
-    });
-  }
-
-  void moverSiguiente() {
     _swiperController.next();
+    // esperar un momento para permitir que la animación de movimiento termine
+    Future.delayed(Duration(milliseconds: 500), () {
+      // eliminar la tarjeta actual del array
+      setState(() {
+        palabras.removeAt(index);
+        definiciones.removeAt(index);
+      });
+      setState(() {});
+    });
   }
 
   void sumarAcierto() {
     setState(() {
+      print("Se ha acertado");
       contadorAcierto++;
     });
   }
 
   void sumarFallo() {
     setState(() {
+      print("Se ha fallado");
       contadorFallo++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    List<List<String>> palabras_def =
-        ModalRoute.of(context)!.settings.arguments as List<List<String>>;
-    palabras = palabras_def[0];
-    definiciones = palabras_def[1];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: gradientEndColor,
@@ -104,7 +114,6 @@ class _GamePageState extends State<GamePage> {
                             palabra: palabras[index],
                             definicion: definiciones[index],
                             eliminarTarjeta: () => eliminarTarjeta(index),
-                            moverSiguiente: () => moverSiguiente(),
                             sumarAcierto: () => sumarAcierto(),
                             sumarFallo: () => sumarFallo(),
                           ),

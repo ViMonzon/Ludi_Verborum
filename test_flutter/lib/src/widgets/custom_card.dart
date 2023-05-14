@@ -7,7 +7,6 @@ class CustomCard extends StatefulWidget {
   final String definicion;
   final String palabra;
   final VoidCallback eliminarTarjeta;
-  final VoidCallback moverSiguiente;
   final VoidCallback sumarAcierto;
   final VoidCallback sumarFallo;
 
@@ -16,7 +15,6 @@ class CustomCard extends StatefulWidget {
     required this.palabra,
     required this.definicion,
     required this.eliminarTarjeta,
-    required this.moverSiguiente,
     required this.sumarAcierto,
     required this.sumarFallo,
   }) : super(key: key);
@@ -119,17 +117,16 @@ class _CustomCardState extends State<CustomCard>
                       _backgroundColor =
                           Colors.green; // Actualizamos el color a verde
                     });
-                    widget.sumarAcierto;
+                    widget.sumarAcierto();
                   } else {
                     setState(() {
                       _backgroundColor =
                           Colors.red; // Actualizamos el color a rojo
                     });
-                    widget.sumarFallo;
+                    widget.sumarFallo();
                   }
                   setState(() {
-                    widget.eliminarTarjeta;
-                    _controller.forward().whenComplete(widget.moverSiguiente);
+                    _controller.forward().whenComplete(widget.eliminarTarjeta);
                   });
                 },
                 child: Text('Enviar'),
