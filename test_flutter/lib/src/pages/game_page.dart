@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
+import 'package:get/get.dart';
 import 'package:test_flutter/src/pages/score_page.dart';
 
 import '../model/word.dart';
@@ -44,6 +45,14 @@ class _GamePageState extends State<GamePage> {
       palabras.removeAt(index);
       definiciones.removeAt(index);
     });
+    if (palabras.isEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ScorePage(aciertos: contadorAcierto, fallos: contadorFallo)),
+      );
+    }
   }
 
   void sumarAcierto() {

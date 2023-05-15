@@ -23,26 +23,8 @@ class HomePage extends StatelessWidget {
       children: <Widget>[
         _crearFondo(context),
         _botonera(context),
-        /*Container(
-          padding: EdgeInsets.symmetric(vertical: 00.0, horizontal: 0.0),
-          child: _botonesRedondeados(context, bloc),
-        ),*/
       ],
     ));
-  }
-
-  Widget _crearBoton(String nombre, BuildContext context, bloc) {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        text: nombre,
-        style: TextStyle(
-            color: primaryTextColor,
-            fontSize: 30,
-            fontWeight: FontWeight.w900,
-            fontFamily: 'Avenir'),
-      ),
-    );
   }
 
   Widget _botonera(BuildContext context) {
@@ -80,7 +62,7 @@ class HomePage extends StatelessWidget {
                     ]),
                     TableRow(
                       decoration: BoxDecoration(
-                        color: secondaryTextColor,
+                        color: fondoMorado,
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       children: [
@@ -97,7 +79,7 @@ class HomePage extends StatelessWidget {
                     TableRow(children: [SizedBox(height: 30)]),
                     TableRow(
                         decoration: BoxDecoration(
-                          color: secondaryTextColor,
+                          color: fondoMorado,
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -111,7 +93,7 @@ class HomePage extends StatelessWidget {
                     TableRow(children: [SizedBox(height: 30)]),
                     TableRow(
                         decoration: BoxDecoration(
-                          color: secondaryTextColor,
+                          color: fondoMorado,
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -145,6 +127,20 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _crearBoton(String nombre, BuildContext context, bloc) {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: nombre,
+        style: TextStyle(
+            color: Colors.grey,
+            fontSize: 30,
+            fontWeight: FontWeight.w900,
+            fontFamily: 'Avenir'),
       ),
     );
   }
