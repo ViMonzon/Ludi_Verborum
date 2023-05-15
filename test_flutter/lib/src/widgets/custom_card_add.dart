@@ -45,10 +45,10 @@ class _CustomCardAddState extends State<CustomCardAdd> {
                 textAlign: TextAlign.left,
               ),
               const SizedBox(
-                height: 24,
+                height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(top: 10),
                 child: TextField(
                   controller: _palabraController,
                   decoration: InputDecoration(
@@ -58,7 +58,7 @@ class _CustomCardAddState extends State<CustomCardAdd> {
                 ),
               ),
               const SizedBox(
-                height: 24,
+                height: 20,
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -72,7 +72,7 @@ class _CustomCardAddState extends State<CustomCardAdd> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                  elevation: 0.0,
+                  elevation: 5.0,
                   backgroundColor: Colors.deepPurple,
                 ),
               ),

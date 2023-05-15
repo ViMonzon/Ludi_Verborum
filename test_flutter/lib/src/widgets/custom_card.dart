@@ -134,7 +134,7 @@ class _CustomCardState extends State<CustomCard>
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                  elevation: 0.0,
+                  elevation: 5.0,
                   backgroundColor: Colors.deepPurple,
                 ),
               ),

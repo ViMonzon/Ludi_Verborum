@@ -6,6 +6,8 @@ import '../bloc/provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,7 @@ class LoginPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          SafeArea(child: Container(height: 170.0)),
+          SafeArea(child: Container(height: 150.0)),
           Container(
             width: size.width * 0.85,
             margin: EdgeInsets.symmetric(vertical: 30.0),
@@ -42,7 +44,8 @@ class LoginPage extends StatelessWidget {
                 ]),
             child: Column(
               children: <Widget>[
-                Text('Login', style: TextStyle(fontSize: 20.0)),
+                Text('Login',
+                    style: TextStyle(fontSize: 20.0, fontFamily: 'Avenir')),
                 SizedBox(height: 20.0),
                 _crearEmail(bloc),
                 SizedBox(height: 20.0),
@@ -106,13 +109,13 @@ class LoginPage extends StatelessWidget {
         return ElevatedButton(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-              child: Text('Login'),
+              child: Text('Login', style: TextStyle(fontFamily: 'Avenir')),
             ),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              elevation: 0.0,
+              elevation: 5.0,
               backgroundColor: Colors.deepPurple,
             ),
             onPressed: () async {
@@ -142,6 +145,7 @@ class LoginPage extends StatelessWidget {
                   "Crea tu cuenta",
                   style: TextStyle(
                     color: Colors.grey[600],
+                    fontFamily: 'Avenir',
                     fontSize: 16,
                   ),
                 ),
@@ -185,7 +189,10 @@ class LoginPage extends StatelessWidget {
               Icon(Icons.book_rounded, color: Colors.white, size: 100.0),
               SizedBox(height: 10.0, width: double.infinity),
               Text('LUDI VERBORUM',
-                  style: TextStyle(color: Colors.white, fontSize: 25.0)),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25.0,
+                      fontFamily: 'Avenir')),
             ],
           ),
         )
