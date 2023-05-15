@@ -13,84 +13,54 @@ class AddPalabra extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = Provider.of(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: gradientEndColor,
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [gradientStartColor, gradientEndColor],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: const [0.1, 0.9])),
-        child: Container(
-          child: Column(children: <Widget>[
-            const HeaderWidgetAdd(),
-            const SizedBox(
-              height: 50,
-            ),
+      body: Stack(children: [
+        _crearFondo(
+          context,
+        ),
+        SingleChildScrollView(
+          child: Column(children: const <Widget>[
+            HeaderWidgetAdd(),
+            SizedBox(height: 50.0),
             CustomCardAdd(),
           ]),
-        ),
-      ),
+        )
+      ]),
+    );
+  }
+
+  Widget _crearFondo(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    final fondoMoradoNaranja = Container(
+      height: size.height * 2,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(colors: <Color>[
+        Color.fromRGBO(237, 128, 50, 0.846),
+        Color.fromRGBO(90, 70, 178, 1.0)
+      ])),
+    );
+
+    final circulo = Container(
+      width: 100.0,
+      height: 100.0,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100.0),
+          color: Color.fromRGBO(255, 255, 255, 0.1)),
+    );
+
+    return Stack(
+      children: <Widget>[
+        fondoMoradoNaranja,
+        Positioned(top: 40.0, left: 10.0, child: circulo),
+        Positioned(top: -40.0, right: -30.0, child: circulo),
+        Positioned(bottom: -50.0, right: -10.0, child: circulo),
+        Positioned(top: 100.0, left: 210.0, child: circulo),
+        Positioned(bottom: -50.0, left: 10.0, child: circulo),
+        Container(
+          padding: EdgeInsets.only(top: 50.0),
+        )
+      ],
     );
   }
 }
-/*
-class _AddPalabraState extends State<addPalabra> {
-  final _palabraController = TextEditingController();
-
-  @override
-  void dispose() {
-    _palabraController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final bloc = Provider.of(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Icon(Icons.book_rounded),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Hola ${bloc.email}'),
-            SizedBox(height: 16),
-            Text('Añade tu palabra'),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Introduce tu palabra',
-              ),
-              controller: _palabraController,
-            ),
-            SizedBox(height: 16),
-            /*ElevatedButton(
-              onPressed: () async {
-                final palabra = _palabraController.text; // <-- agregado
-                EasyLoading.show();
-                await HttpService.add(bloc.email, palabra, context);
-                EasyLoading.dismiss();
-              },
-              child: Text('Añadir palabra'),
-            ),*/
-            SizedBox(height: 16),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Introduce un texto corto',
-              ),
-            ),
-            SizedBox(height: 16),
-            Visibility(
-              /*visible: /* Aquí pones la condición */,*/
-              child: Text('Texto que aparece bajo ciertas condiciones'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}*/
