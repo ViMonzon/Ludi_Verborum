@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ludi Verborum',
-        initialRoute: 'login',
+        initialRoute: 'splash',
         routes: {
-          /*'splash': (BuildContext context) => const SplashPage(),*/
+          'splash': (BuildContext context) => const SplashPage(),
           'login': (BuildContext context) => LoginPage(),
           'home': (BuildContext context) => HomePage(),
           'juego': (BuildContext context) => GamePage(),

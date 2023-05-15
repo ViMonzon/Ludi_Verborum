@@ -29,17 +29,17 @@ class _SplashPageState extends State<SplashPage>
     super.initState();
     _initImage();
     animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 10));
-    tween = Tween<double>(begin: 10, end: 1);
+        AnimationController(vsync: this, duration: Duration(seconds: 5));
+    tween = Tween<double>(begin: -1, end: 1);
     final Animation<double> curve =
-        CurvedAnimation(parent: animationController, curve: Curves.ease);
+        CurvedAnimation(parent: animationController, curve: Curves.easeInOut);
     animation = tween.animate(curve);
     animationController.repeat(reverse: true);
 
     Timer(
-        const Duration(milliseconds: 6200),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginPage())));
+        const Duration(milliseconds: 6000),
+        () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const LoginPage())));
   }
 
   @override
@@ -54,8 +54,11 @@ class _SplashPageState extends State<SplashPage>
         ),
         Center(
           child: Text(
-            "LVDI VERBORVUM ",
-            style: TextStyle(fontSize: 42, color: secondaryTextColor),
+            "LVDI VERBORVM ",
+            style: TextStyle(
+                fontSize: 42,
+                color: titleTextColor,
+                fontWeight: FontWeight.w900),
           ),
         )
       ],
@@ -83,18 +86,40 @@ class SplashPainter extends CustomPainter {
   SplashPainter(this.anim, this.image) : super(repaint: anim) {
     _generate();
   }
-
   @override
   void paint(Canvas canvas, Size size) {
-    final p = Path();
+    final alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     for (var i = 0; i < path.length; i++) {
-      p.addOval(Rect.fromCircle(
-          center: Offset(path[i].dx - ((path[i].dx - path2[i].dx) / anim.value),
-              path[i].dy - ((path[i].dy - path2[i].dy) / anim.value)),
-          radius: i.isEven ? 10 : 7));
+      final offsetY = path[i].dy + ((path2[i].dy - path[i].dy) * anim.value);
+      final center = Offset(path[i].dx, offsetY);
+      double radius = i.isEven ? 40 : 17;
+
+      final letter = alphabet[i % alphabet.length];
+      final textSpan = TextSpan(
+        text: letter,
+        style: const TextStyle(
+            color: Colors.white,
+            fontFamily: 'Avenir',
+            fontSize: 15,
+            fontWeight: FontWeight.w600),
+      );
+      final textPainter = TextPainter(
+        text: textSpan,
+        textDirection: TextDirection.ltr,
+      );
+      textPainter.layout();
+      final textOffset = Offset(
+        center.dx - textPainter.width / 2,
+        center.dy - textPainter.height / 2,
+      );
+
+      final p = Path();
+      p.addOval(Rect.fromCircle(center: center, radius: radius));
+
+      canvas.drawPath(p, Paint()..color = primaryTextColor);
+      textPainter.paint(canvas, textOffset);
     }
-    canvas.drawPath(p, Paint()..color = primaryTextColor);
   }
 
   @override
@@ -104,7 +129,7 @@ class SplashPainter extends CustomPainter {
   bool shouldRebuildSemantics(SplashPainter oldDelegate) => true;
 
   void _generate() async {
-    for (var i = 0; i < 40; i++) {
+    for (var i = 0; i < 50; i++) {
       path.add(Offset(Random().nextDouble() * Get.width * 1.5,
           Random().nextDouble() * Get.height * 1.5));
       path2.add(Offset(Random().nextDouble() * Get.width * 1.5,
