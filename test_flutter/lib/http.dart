@@ -103,7 +103,7 @@ class HttpService {
       await EasyLoading.showSuccess("Palabra " + word + " añadida");
     } else {
       await EasyLoading.showError(
-          "Error Code : ${response.statusCode.toString()}");
+          "Error Code: ${response.statusCode.toString()}");
     }
   }
 

@@ -13,7 +13,7 @@ db = firebase.database()
 auth = firebase.auth()
 
 def login(email, password):
-    # Autenticación de usuario con email y contraseña
+#Autenticación de usuario con email y contraseña
     try:
         auth.sign_in_with_email_and_password(email, password)
         print("Inicio de sesión exitoso")
