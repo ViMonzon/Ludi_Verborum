@@ -1,7 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
-import 'package:get/get.dart';
 import 'package:test_flutter/src/pages/score_page.dart';
 import '../model/word.dart';
 import '../themes/constants.dart';
@@ -101,31 +100,31 @@ class _GamePageState extends State<GamePage> {
                   maxWidth: MediaQuery.of(context).size.width,
                 ),
                 child: Swiper(
-                        controller: _swiperController,
-                        itemCount: palabras.length,
-                        itemWidth: MediaQuery.of(context).size.width,
-                        itemHeight: MediaQuery.of(context).size.height,
-                        layout: SwiperLayout.TINDER,
-                        itemBuilder: (context, index) {
-                          return IndexedStack(
-                            children: [
-                              Column(
-                                children: [
-                                  CustomCard(
-                                    key: Key(palabras[index]),
-                                    palabra: palabras[index],
-                                    definicion: definiciones[index],
-                                    eliminarTarjeta: () =>
-                                        eliminarTarjeta(index),
-                                    sumarAcierto: () => sumarAcierto(),
-                                    sumarFallo: () => sumarFallo(),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                  controller: _swiperController,
+                  itemCount: palabras.length,
+                  itemWidth: MediaQuery.of(context).size.width,
+                  itemHeight: MediaQuery.of(context).size.height,
+                  layout: SwiperLayout.TINDER,
+                  itemBuilder: (context, index) {
+                    return IndexedStack(
+                      children: [
+                        Column(
+                          children: [
+                            CustomCard(
+                              // añadir key para automatizar la actualización de Status
+                              key: Key(palabras[index]),
+                              palabra: palabras[index],
+                              definicion: definiciones[index],
+                              eliminarTarjeta: () => eliminarTarjeta(index),
+                              sumarAcierto: () => sumarAcierto(),
+                              sumarFallo: () => sumarFallo(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ))
           ],
