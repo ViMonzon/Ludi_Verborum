@@ -100,31 +100,35 @@ class _GamePageState extends State<GamePage> {
                   maxHeight: MediaQuery.of(context).size.height,
                   maxWidth: MediaQuery.of(context).size.width,
                 ),
-                child: Swiper(
-                  controller: _swiperController,
-                  itemCount: palabras.length,
-                  itemWidth: MediaQuery.of(context).size.width,
-                  itemHeight: MediaQuery.of(context).size.height,
-                  layout: SwiperLayout.TINDER,
-                  itemBuilder: (context, index) {
-                    return IndexedStack(
-                      children: [
-                        Column(
-                          children: [
-                            CustomCard(
-                              key: Key(palabras[index]),
-                              palabra: palabras[index],
-                              definicion: definiciones[index],
-                              eliminarTarjeta: () => eliminarTarjeta(index),
-                              sumarAcierto: () => sumarAcierto(),
-                              sumarFallo: () => sumarFallo(),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                ),
+                child: palabras.isEmpty
+                    ? ScorePage(
+                        aciertos: contadorAcierto, fallos: contadorFallo)
+                    : Swiper(
+                        controller: _swiperController,
+                        itemCount: palabras.length,
+                        itemWidth: MediaQuery.of(context).size.width,
+                        itemHeight: MediaQuery.of(context).size.height,
+                        layout: SwiperLayout.TINDER,
+                        itemBuilder: (context, index) {
+                          return IndexedStack(
+                            children: [
+                              Column(
+                                children: [
+                                  CustomCard(
+                                    key: Key(palabras[index]),
+                                    palabra: palabras[index],
+                                    definicion: definiciones[index],
+                                    eliminarTarjeta: () =>
+                                        eliminarTarjeta(index),
+                                    sumarAcierto: () => sumarAcierto(),
+                                    sumarFallo: () => sumarFallo(),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
+                      ),
               ),
             ))
           ],
