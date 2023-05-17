@@ -100,10 +100,7 @@ class _GamePageState extends State<GamePage> {
                   maxHeight: MediaQuery.of(context).size.height,
                   maxWidth: MediaQuery.of(context).size.width,
                 ),
-                child: palabras.isEmpty
-                    ? ScorePage(
-                        aciertos: contadorAcierto, fallos: contadorFallo)
-                    : Swiper(
+                child: Swiper(
                         controller: _swiperController,
                         itemCount: palabras.length,
                         itemWidth: MediaQuery.of(context).size.width,
