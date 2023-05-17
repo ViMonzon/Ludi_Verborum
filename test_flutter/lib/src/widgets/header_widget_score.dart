@@ -8,20 +8,21 @@ class HeaderWidgetScore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(26.0),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      padding: const EdgeInsets.all(30.0),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+        SizedBox(height: 40),
         Text(
-          "Puntuación",
+          "Tu puntuación",
           style: TextStyle(
               color: titleTextColor,
               fontSize: 40,
               fontWeight: FontWeight.w900,
               fontFamily: 'Avenir'),
-          textAlign: TextAlign.left,
+          textAlign: TextAlign.center,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          /*children: [
             IconButton(
               icon: const Icon(Icons.arrow_back_ios_rounded),
               onPressed: () => Navigator.pushReplacementNamed(context, 'home'),
@@ -32,7 +33,7 @@ class HeaderWidgetScore extends StatelessWidget {
                   fontFamily: 'Avenir'),
               textAlign: TextAlign.center,*/
             )
-          ],
+          ],*/
         ),
       ]),
     );

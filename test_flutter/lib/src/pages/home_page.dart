@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter/src/bloc/provider.dart';
 import 'package:test_flutter/src/bloc/login_bloc.dart';
 import 'package:test_flutter/src/widgets/header_widget_home.dart';
-
+import 'package:test_flutter/src/widgets/crear_fondo.dart';
 import '../../http.dart';
 import '../themes/constants.dart';
 import '../themes/constants.dart';
@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         body: Stack(
       children: <Widget>[
-        _crearFondo(context),
+        crearFondo(context),
         _botonera(context),
       ],
     ));
@@ -145,7 +145,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _crearFondo(BuildContext context) {
+  /*Widget _crearFondo(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     final fondoMoradoNaranja = Container(
@@ -187,5 +187,5 @@ class HomePage extends StatelessWidget {
         )
       ],
     );
-  }
+  }*/
 }

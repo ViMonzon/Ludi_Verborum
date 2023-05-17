@@ -86,6 +86,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.5"
+  flutter_icons:
+    dependency: "direct main"
+    description:
+      name: flutter_icons
+      sha256: ad1c830f729c71216372d1a8d62c08c6dd792227d9492d5130aea5e391210a9f
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -123,6 +131,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_vector_icons:
+    dependency: "direct main"
+    description:
+      name: flutter_vector_icons
+      sha256: "20a77e282f8cb438c8edcee4eec85d8497d5f4cbeb07d116e9d2d01c9edfc5e2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   get:
     dependency: "direct main"
     description:
