@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:get/get.dart';
 import 'package:test_flutter/src/pages/score_page.dart';
-
 import '../model/word.dart';
-
 import '../themes/constants.dart';
-
 import '../themes/customs.dart';
 import '../widgets/card.dart';
 import '../widgets/custom_card.dart';
@@ -76,11 +73,8 @@ class _GamePageState extends State<GamePage> {
       backgroundColor: gradientEndColor,
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [gradientStartColor, gradientEndColor],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: const [0.1, 0.9])),
+            gradient:
+                LinearGradient(colors: <Color>[fondoNaranja, fondoMorado])),
         child: Expanded(
             child: Column(
           children: <Widget>[
@@ -100,6 +94,7 @@ class _GamePageState extends State<GamePage> {
               ),
             ),
             Expanded(
+                child: SingleChildScrollView(
               child: Container(
                 constraints: BoxConstraints(
                   maxHeight: MediaQuery.of(context).size.height,
@@ -131,7 +126,7 @@ class _GamePageState extends State<GamePage> {
                   },
                 ),
               ),
-            )
+            ))
           ],
         )),
       ),

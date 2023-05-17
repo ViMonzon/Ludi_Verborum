@@ -5,6 +5,7 @@ import 'package:test_flutter/src/bloc/provider.dart';
 
 import '../../http.dart';
 import '../themes/constants.dart';
+import '../widgets/crear_fondo.dart';
 
 class DictionaryPage extends StatefulWidget {
   final String definicion;
@@ -34,7 +35,7 @@ class _DictionaryPageState extends State<DictionaryPage> {
       backgroundColor: gradientEndColor,
       body: Stack(
         children: [
-          _crearFondo(context),
+          crearFondo(context),
           Container(
             child: ListView.builder(
               itemCount: palabras.length,
@@ -88,42 +89,6 @@ class _DictionaryPageState extends State<DictionaryPage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _crearFondo(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    final fondoMoradoNaranja = Container(
-      height: size.height * 1,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: <Color>[
-        Color.fromRGBO(237, 128, 50, 0.846),
-        Color.fromRGBO(90, 70, 178, 1.0)
-      ])),
-    );
-
-    final circulo = Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100.0),
-          color: Color.fromRGBO(255, 255, 255, 0.1)),
-    );
-
-    return Stack(
-      children: <Widget>[
-        fondoMoradoNaranja,
-        Positioned(top: 40.0, left: 10.0, child: circulo),
-        Positioned(top: -40.0, right: -30.0, child: circulo),
-        Positioned(bottom: -50.0, right: -10.0, child: circulo),
-        Positioned(top: 100.0, left: 210.0, child: circulo),
-        Positioned(bottom: -50.0, left: 10.0, child: circulo),
-        Container(
-          padding: EdgeInsets.only(top: 100.0),
-        )
-      ],
     );
   }
 

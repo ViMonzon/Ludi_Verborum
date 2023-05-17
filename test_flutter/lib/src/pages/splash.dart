@@ -30,7 +30,7 @@ class _SplashPageState extends State<SplashPage>
     _initImage();
     animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 5));
-    tween = Tween<double>(begin: -1, end: 1);
+    tween = Tween<double>(begin: -1, end: 0.25);
     final Animation<double> curve =
         CurvedAnimation(parent: animationController, curve: Curves.easeInOut);
     animation = tween.animate(curve);
@@ -117,7 +117,7 @@ class SplashPainter extends CustomPainter {
       final p = Path();
       p.addOval(Rect.fromCircle(center: center, radius: radius));
 
-      canvas.drawPath(p, Paint()..color = primaryTextColor);
+      canvas.drawPath(p, Paint()..color = primaryTextColor.withOpacity(0.5));
       textPainter.paint(canvas, textOffset);
     }
   }
