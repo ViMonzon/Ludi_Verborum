@@ -76,17 +76,31 @@ class UserDAO:
         print("esto son las palabras:" + str(words))            
         return words
 
-    def get_all_word(self,user_email):
-        db=firestore.client()
-        letter_collection = db.collection('users').document(user_email).collection("letter")
-        words = []
+    def get_all_words(self,user_email):
+        db = firestore.client()
+        word_list=[]
         for letter in letters:
-            word_collection = letter_collection.document(letter).collection("word")
-            for word in word_collection:
-                word_ref = word_collection.document(word).get()
-                words.extend(word_ref)
-        return words
-
+            word_collection = db.collection('users').document(user_email).collection('letter').document(letter).collection('word').get()
+            if word_collection:
+                for word in word_collection:                
+                    definitions = word.to_dict().get('definiciones', [])
+                    if definitions:                      
+                        word_dict = {"palabra": word.id, "definicion": definitions}
+                        word_list.append(word_dict)
+                        print(word_list)
+                    else:
+                        print(f"No se encontraron definiciones para la palabra {word}.")
+            else:
+                print(f"No se encontraron palabras para la letra {letter}.")       
+        print(type(word_list))
+        return word_list
+    
+    def get_def(self,user_email, word):
+        db = firestore.client()
+        def_list = db.collection('users').document(user_email).collection('letter').document(unidecode(word[0])).collection('word').document(word).get().to_dict().get('definiciones', [])
+        print(def_list)
+        return def_list
+        
 
     def check_word_dict(self, user_email, word):
         words = self.get_words_letter(user_email, word[0])

@@ -133,7 +133,7 @@ class LoginPage extends StatelessWidget {
               onTap: () async {
                 // Método que se ejecuta al presionar el botón
                 EasyLoading.show();
-                //await HttpService.register(bloc.email, bloc.password, context);
+                await HttpService.register(bloc.email, bloc.password, context);
                 EasyLoading.dismiss();
               },
               child: Container(

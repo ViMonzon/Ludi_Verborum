@@ -4,6 +4,8 @@ from flask_login import login_user, logout_user, login_required
 from flask_login import current_user
 from user import User
 
+from werkzeug.serving import WSGIRequestHandler
+
 from flask_login import LoginManager
 
 from user_dao import UserDAO, default_app
@@ -116,6 +118,25 @@ def list_game():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
+@app.route('/definitions', methods=['POST'])
+def list_def():
+     
+    
+        user_email = request.json['email']
+        word_f = request.json['word']
+        print(user_email + word_f)  
+        definitions = user_dao.get_def(user_email,word_f)
+        print(definitions)
+    #try:
+        if definitions is not None: 
+            return jsonify(definitions)
+        else:
+            return 'No hay definiciones en la colección', 400
+            """
+    except Exception as e:
+        app.logger.error(str(e))
+        return 'Error: ' + str(e), 500
+"""
 
 @app.route('/add', methods=['POST'])
 def add():    
@@ -158,4 +179,5 @@ def logout():
 
 # PUERTO 5000 por defecto: http://localhost:5000/
 if __name__ == "__main__":
+    WSGIRequestHandler.protocol_version = "HTTP/1.1" #Arreglar Connection closed while receiving data
     app.run(threaded=True)

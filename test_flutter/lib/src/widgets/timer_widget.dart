@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:test_flutter/src/utils/user_preferences.dart';
 
+import '../bloc/provider.dart';
 import '../themes/constants.dart';
 
 class TimerWidget extends StatefulWidget {
@@ -14,12 +16,28 @@ class TimerWidget extends StatefulWidget {
 
 class _TimerWidgetState extends State<TimerWidget> {
   late Timer _timer;
-  int _seconds = 600;
+  final _preferencesService = PreferencesService();
+  int _seconds = 200;
+  int _maxSecods = 200;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final bloc = Provider.of(context);
+    initSeconds(bloc.email);
     startTimer();
+  }
+
+  void initSeconds(String email) async {
+    final settings = await _preferencesService.getSettings(email);
+    setState(() {
+      _seconds = settings.time;
+      _maxSecods = settings.time;
+    });
   }
 
   void startTimer() {
@@ -47,7 +65,7 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double progress = _seconds / 120;
+    double progress = _seconds / _maxSecods;
     return Stack(
       children: [
         Center(
