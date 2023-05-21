@@ -43,8 +43,12 @@ class _DictionaryPageState extends State<DictionaryPage> {
                 String inicial =
                     removeDiacritics(palabras[index][0].toUpperCase());
                 return GestureDetector(
-                    onTap: () {
-                      _mostrarVentanaEmergente(context, palabras[index]);
+                    onTap: () async {
+                      print(palabras[index]);
+                      var definiciones = await HttpService.get_def(
+                          bloc.email, palabras[index], context);
+                      _mostrarVentanaEmergente(
+                          context, palabras[index], definiciones);
                     },
                     child: Dismissible(
                       key: ValueKey(palabras[index].toString()),
@@ -92,13 +96,26 @@ class _DictionaryPageState extends State<DictionaryPage> {
     );
   }
 
-  void _mostrarVentanaEmergente(BuildContext context, String palabra) {
+  void _mostrarVentanaEmergente(
+      BuildContext context, String word, List<String> definiciones) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Definición'),
-          content: Text(palabra),
+          title: Text(word),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView.builder(
+              //Ajustar automáticamente la altura del ListView
+              shrinkWrap: true,
+              itemCount: definiciones.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(definiciones[index]),
+                );
+              },
+            ),
+          ),
           actions: <Widget>[
             TextButton(
               child: Text('Cerrar'),

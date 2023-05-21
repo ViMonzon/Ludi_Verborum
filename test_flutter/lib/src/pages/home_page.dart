@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
     String nombreJugar = "¡A jugar!";
     String nombreAdd = "Añadir Palabra";
     String nombreDiccionario = "Diccionario";
+    String nombreOpciones = "Opciones";
 
     return SingleChildScrollView(
       child: Column(
@@ -60,6 +61,7 @@ class HomePage extends StatelessWidget {
                     TableRow(children: [
                       SizedBox(height: 30),
                     ]),
+                    //<----BOTÓN JUEGO---->
                     TableRow(
                       decoration: BoxDecoration(
                         color: fondoMorado,
@@ -76,6 +78,7 @@ class HomePage extends StatelessWidget {
                             }),
                       ],
                     ),
+                    //<----BOTÓN AÑADIR---->
                     TableRow(children: [SizedBox(height: 30)]),
                     TableRow(
                         decoration: BoxDecoration(
@@ -90,6 +93,7 @@ class HomePage extends StatelessWidget {
                                 Navigator.pushNamed(context, 'addPalabra'),
                           ),
                         ]),
+                    //<----BOTÓN DICCIONARIO---->
                     TableRow(children: [SizedBox(height: 30)]),
                     TableRow(
                         decoration: BoxDecoration(
@@ -104,11 +108,31 @@ class HomePage extends StatelessWidget {
                             onTap: () async {
                               var palabras_dict = await HttpService.dictionary(
                                   bloc.email, context);
-                              Navigator.pushNamed(context, 'dictionary',
-                                  arguments: palabras_dict);
+                              Navigator.pushNamed(
+                                context,
+                                'dictionary',
+                                arguments: palabras_dict,
+                              );
                             },
                           ),
                         ]),
+                    //<----BOTÓN OPCIONES---->
+                    TableRow(children: [SizedBox(height: 30)]),
+                    TableRow(
+                        decoration: BoxDecoration(
+                          color: fondoMorado,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        children: [
+                          GestureDetector(
+                            child: _crearBoton(nombreOpciones, context, bloc),
+                            onTap: () async {
+                              Navigator.pushNamed(context, 'options');
+                            },
+                          ),
+                        ]),
+                    //<----BOTÓN LOGOUT---->
                     TableRow(children: [
                       SizedBox(height: 50),
                     ]),

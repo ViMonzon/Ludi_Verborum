@@ -7,6 +7,7 @@ import 'package:test_flutter/src/pages/home_page.dart';
 import 'package:test_flutter/src/pages/login_page.dart';
 import 'package:test_flutter/src/pages/game_page.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:test_flutter/src/pages/option_page.dart';
 import 'package:test_flutter/src/pages/splash.dart';
 
 import 'src/pages/add_palabra.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           'home': (BuildContext context) => HomePage(),
           'juego': (BuildContext context) => GamePage(),
           'addPalabra': (BuildContext context) => AddPalabra(),
-          //'opciones': (BuildContext context) => opcionesPage(),
+          'options': (BuildContext context) => OptionsPage(),
           'dictionary': (BuildContext context) => DictionaryPage(),
         },
         theme: ThemeData(

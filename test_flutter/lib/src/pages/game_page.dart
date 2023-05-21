@@ -2,7 +2,6 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:test_flutter/src/pages/score_page.dart';
-import '../model/word.dart';
 import '../themes/constants.dart';
 import '../themes/customs.dart';
 import '../widgets/card.dart';

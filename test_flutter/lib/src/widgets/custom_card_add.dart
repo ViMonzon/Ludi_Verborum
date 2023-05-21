@@ -62,7 +62,7 @@ class _CustomCardAddState extends State<CustomCardAdd> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  final palabra = _palabraController.text; // <-- agregado
+                  final palabra = _palabraController.text;
                   EasyLoading.show();
                   await HttpService.add(bloc.email, palabra, context);
                   EasyLoading.dismiss();

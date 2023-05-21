@@ -24,6 +24,7 @@ class HttpService {
 
   static var _addUrl = Uri.parse('http://' + localhost + ':5000/add');
   static var _deleteUrl = Uri.parse('http://' + localhost + ':5000/delete');
+  static var _defUrl = Uri.parse('http://' + localhost + ':5000/definitions');
 
   static var _logoutUrl = Uri.parse('http://' + localhost + ':5000/logout');
 
@@ -113,6 +114,21 @@ class HttpService {
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
       await EasyLoading.showSuccess("Palabra" + word + "borrada");
+    } else {
+      await EasyLoading.showError(
+          "Error Code : ${response.statusCode.toString()}");
+    }
+  }
+
+  static get_def(email, word, context) async {
+    Map data = {'email': email, 'word': word};
+    http.Response response = await _client.post(_defUrl,
+        body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      List<String> definiciones = List<String>.from(json).cast<String>();
+      print(definiciones);
+      return definiciones;
     } else {
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");
