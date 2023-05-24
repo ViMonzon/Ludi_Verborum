@@ -73,9 +73,9 @@ class _TimerWidgetState extends State<TimerWidget> {
           width: 100,
           height: 100,
           child: CircularProgressIndicator(
-            value: progress,
-            backgroundColor: Colors.grey[300],
-            valueColor: AlwaysStoppedAnimation<Color>(secondaryTextColor),
+            value: 1 - progress,
+            backgroundColor: secondaryTextColor,
+            valueColor: const AlwaysStoppedAnimation<Color>(Colors.white70),
             strokeWidth: 10,
           ),
         )),

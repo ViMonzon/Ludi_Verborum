@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/provider.dart';
+import '../themes/customs.dart';
+import '../widgets/header_widget_option.dart';
 
 class OptionsPage extends StatefulWidget {
   @override
@@ -39,35 +41,60 @@ class _OptionsPageState extends State<OptionsPage> {
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of(context);
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('User Settings'),
-        ),
-        body: ListView(
-          children: [
-            ListTile(
-              title: TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(labelText: 'Username'),
+    final size = MediaQuery.of(context).size;
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          crearFondo(context),
+          Column(
+            children: [
+              const HeaderWidgetOption(),
+              SizedBox(height: 50),
+              Container(
+                width: size.width * 0.85,
+                padding: EdgeInsets.symmetric(vertical: 50.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5.0),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 3.0,
+                          offset: Offset(0.0, 5.0),
+                          spreadRadius: 3.0)
+                    ]),
+                child: Column(children: <Widget>[
+                  ListTile(
+                    title: TextField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        labelText: 'Cambia tu Username',
+                      ),
+                      keyboardType: TextInputType.name,
+                    ),
+                  ),
+                  ListTile(
+                    title: TextField(
+                      controller: _time,
+                      decoration:
+                          InputDecoration(labelText: 'Introduce el tiempo'),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  _botonOpciones(context),
+                  /*TextButton(
+                onPressed: () {
+                  _saveSettings(bloc.email);
+                },
+                child: Text('Save Settings'),
+             )*/
+                ]),
               ),
-            ),
-            ListTile(
-              title: TextField(
-                controller: _time,
-                decoration: InputDecoration(labelText: 'Enter Number'),
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                _saveSettings(bloc.email);
-              },
-              child: Text('Save Settings'),
-            )
-          ],
-        ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -82,5 +109,33 @@ class _OptionsPageState extends State<OptionsPage> {
 
     print(newSettings);
     _preferencesService.saveSettings(email, newSettings);
+  }
+
+  Widget _botonOpciones(context) {
+    final bloc = Provider.of(context);
+    return ElevatedButton(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+          child: Text(
+            'Guardar cambios',
+            style: TextStyle(
+              fontFamily: 'Avenir',
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          elevation: 5.0,
+          minimumSize: Size(0, 0),
+          padding: EdgeInsets.zero,
+          backgroundColor: Colors.deepPurple,
+        ),
+        onPressed: () {
+          _saveSettings(bloc.email);
+        });
   }
 }

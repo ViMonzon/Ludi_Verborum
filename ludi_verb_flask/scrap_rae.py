@@ -3,7 +3,8 @@ from bs4 import BeautifulSoup as bs
 import pandas as pd
 import numpy as np
 
-def myword(word):  
+
+def myword(word):
 
     url = 'https://dle.rae.es/' + word
     print(url)
@@ -18,10 +19,15 @@ def myword(word):
 
     for d in definitions:
         for h in d.find_all('span', {'class': 'h'}):
-            h.extract()  #Eliminar los elementos internos con la clase "h"
+            h.extract()  # Eliminar los elementos internos con la clase "h"
         defs.append(d.text)
 
-    
+    """for d in definitions:
+        for h in d.find_all('span', {'class': 'h'}):
+            definition_text = d.get_text(strip=True)
+            if definition_text.lower() != word.lower():  # Eliminar los elementos internos con la clase "h"
+                defs.append(definition_text)"""
+
     defs_validas = []
 
     for i in defs:
@@ -31,7 +37,7 @@ def myword(word):
 
     print(def_string_val)
     nueva_palabra = {
-    "palabra": word,
-    "definiciones": defs
+        "palabra": word,
+        "definiciones": defs
     }
     return nueva_palabra

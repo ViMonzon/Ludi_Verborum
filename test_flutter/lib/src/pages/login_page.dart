@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          SafeArea(child: Container(height: 150.0)),
+          SafeArea(child: Container(height: 160.0)),
           Container(
             width: size.width * 0.85,
             margin: EdgeInsets.symmetric(vertical: 30.0),
@@ -186,9 +186,15 @@ class LoginPage extends StatelessWidget {
           padding: EdgeInsets.only(top: 50.0),
           child: Column(
             children: <Widget>[
-              Icon(Icons.book_rounded, color: Colors.white, size: 100.0),
-              SizedBox(height: 10.0, width: double.infinity),
-              Text('LUDI VERBORUM',
+              Image.asset(
+                'lib/assets/images/ludi2new.png', // Reemplaza 'ruta_del_icono.png' con la ruta correcta de tu archivo PNG
+                width: 100.0,
+                height: 100.0,
+                // Color del icono
+              ),
+              /*Icon(Icons.book_rounded, color: Colors.white, size: 100.0),*/
+              SizedBox(width: double.infinity),
+              Text('LVDI V3RBORVM',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25.0,
