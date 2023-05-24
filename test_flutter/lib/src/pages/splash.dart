@@ -27,7 +27,6 @@ class _SplashPageState extends State<SplashPage>
   @override
   void initState() {
     super.initState();
-    _initImage();
     animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 5));
     tween = Tween<double>(begin: -1, end: 0.25);
@@ -53,14 +52,22 @@ class _SplashPageState extends State<SplashPage>
           child: const SizedBox.expand(),
         ),
         Center(
-          child: Text(
-            "LVDI VERBORVM ",
+            child: Column(children: <Widget>[
+          SizedBox(height: 250),
+          Image.asset(
+            'lib/assets/images/ludi2new.png', // Reemplaza 'ruta_del_icono.png' con la ruta correcta de tu archivo PNG
+            width: 100.0,
+            height: 100.0,
+            // Color del icono
+          ),
+          Text(
+            "LVDI V3RBORVM ",
             style: TextStyle(
                 fontSize: 42,
                 color: titleTextColor,
                 fontWeight: FontWeight.w900),
           ),
-        )
+        ]))
       ],
     ));
   }
@@ -69,11 +76,6 @@ class _SplashPageState extends State<SplashPage>
   void dispose() {
     animationController.dispose(); //dispose the ticker here
     super.dispose();
-  }
-
-  void _initImage() async {
-    image = await rootBundle.load('lib/assets/images/ludi2.png');
-    setState(() {});
   }
 }
 
@@ -135,6 +137,5 @@ class SplashPainter extends CustomPainter {
       path2.add(Offset(Random().nextDouble() * Get.width * 1.5,
           Random().nextDouble() * Get.height * 1.5));
     }
-    if (image != null) {}
   }
 }

@@ -15,9 +15,6 @@ import '../widgets/header_widget_add.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final bloc = Provider.of(context);
-
     return Scaffold(
         body: Stack(
       children: <Widget>[
@@ -41,7 +38,7 @@ class HomePage extends StatelessWidget {
           const HeaderWidgetHome(),
           Container(
             width: size.width * 0.85,
-            padding: EdgeInsets.symmetric(vertical: 50.0),
+            padding: EdgeInsets.symmetric(vertical: 30.0),
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5.0),
@@ -136,15 +133,21 @@ class HomePage extends StatelessWidget {
                     TableRow(children: [
                       SizedBox(height: 50),
                     ]),
-                    TableRow(children: [
-                      GestureDetector(
-                        child: _crearBoton("Logout", context, bloc),
-                        onTap: () async {
-                          bloc.clearLogin();
-                          Navigator.pushNamed(context, 'login');
-                        },
-                      ),
-                    ]),
+                    TableRow(
+                        decoration: BoxDecoration(
+                          color: fondoNaranja.withOpacity(0.5),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        children: [
+                          GestureDetector(
+                            child: _crearBoton("Logout", context, bloc),
+                            onTap: () async {
+                              bloc.clearLogin();
+                              Navigator.pushNamed(context, 'login');
+                            },
+                          ),
+                        ]),
                   ],
                 ),
               ],
@@ -161,55 +164,11 @@ class HomePage extends StatelessWidget {
       text: TextSpan(
         text: nombre,
         style: TextStyle(
-            color: Colors.grey,
+            color: Colors.white,
             fontSize: 30,
             fontWeight: FontWeight.w900,
             fontFamily: 'Avenir'),
       ),
     );
   }
-
-  /*Widget _crearFondo(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    final fondoMoradoNaranja = Container(
-      height: size.height * 1,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: <Color>[
-        Color.fromRGBO(237, 128, 50, 0.846),
-        Color.fromRGBO(90, 70, 178, 1.0)
-      ])),
-    );
-
-    final circulo = Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100.0),
-          color: Color.fromRGBO(255, 255, 255, 0.1)),
-    );
-
-    return Stack(
-      children: <Widget>[
-        fondoMoradoNaranja,
-        Positioned(top: 40.0, left: 10.0, child: circulo),
-        Positioned(top: -40.0, right: -30.0, child: circulo),
-        Positioned(bottom: -50.0, right: -10.0, child: circulo),
-        Positioned(top: 100.0, left: 210.0, child: circulo),
-        Positioned(bottom: -50.0, left: 10.0, child: circulo),
-        Container(
-          padding: EdgeInsets.only(top: 100.0),
-          /*child: Column(
-            children: <Widget>[
-              Icon(Icons.book_rounded, color: Colors.white, size: 100.0),
-              SizedBox(height: 10.0, width: double.infinity),
-              Text('LUDI VERBORUM',
-                  style: TextStyle(color: Colors.white, fontSize: 25.0)),
-            ],
-          ),*/
-        )
-      ],
-    );
-  }*/
 }
