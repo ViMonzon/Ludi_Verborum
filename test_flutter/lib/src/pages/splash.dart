@@ -61,7 +61,7 @@ class _SplashPageState extends State<SplashPage>
             // Color del icono
           ),
           Text(
-            "LVDI V3RBORVM ",
+            "LVDI VERBORVM ",
             style: TextStyle(
                 fontSize: 42,
                 color: titleTextColor,

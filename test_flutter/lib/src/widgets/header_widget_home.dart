@@ -29,9 +29,9 @@ class HeaderWidgetHome extends StatelessWidget {
               return Text('Error: ${snapshot.error}');
             } else {
               final username = snapshot.data?.username ?? '';
-              final email = bloc.email ?? '';
+              final email = bloc.email;
               final displayText = username.isNotEmpty ? username : email;
-              final display = ', ' + displayText; // Obtén el nombre de usuario
+              final display = ', $displayText'; // Obtén el nombre de usuario
 
               return Text(
                 "¡HOLA$display!", // Muestra el nombre de usuario

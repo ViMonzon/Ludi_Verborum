@@ -18,6 +18,7 @@ class _OptionsPageState extends State<OptionsPage> {
 
   final _usernameController = TextEditingController();
   var _time = TextEditingController();
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -26,7 +27,10 @@ class _OptionsPageState extends State<OptionsPage> {
 
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _populateFields();
+    if (_isLoading) {
+      _populateFields();
+      _isLoading = false;
+    }
   }
 
   void _populateFields() async {
