@@ -194,7 +194,7 @@ class LoginPage extends StatelessWidget {
               ),
               /*Icon(Icons.book_rounded, color: Colors.white, size: 100.0),*/
               SizedBox(width: double.infinity),
-              Text('LVDI V3RBORVM',
+              Text('LVDI VERBORVM',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25.0,
