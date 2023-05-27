@@ -72,6 +72,7 @@ flutter:
     - lib\assets\images\ludi2new.png
     - lib\assets\images\acierto.png
     - lib\assets\images\error.png
+    - lib\assets\images\ludi_new_sin_fondo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -92,8 +93,15 @@ flutter:
     - family: bangers
       fonts:
         - asset: lib\assets\fonts\Bangers-Regular.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+    #       - asset: fonts/TrajanPro_Bold.ttf
+    #         weight: 700
+    - family: latinia
+      fonts:
+        - asset: lib\assets\fonts\LatiniaBlack.ttf
+
+    - family: latiniaLight
+      fonts:
+        - asset: lib\assets\fonts\Latinia.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
