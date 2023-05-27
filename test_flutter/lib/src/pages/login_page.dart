@@ -187,9 +187,9 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Image.asset(
-                'lib/assets/images/ludi2new.png', // Reemplaza 'ruta_del_icono.png' con la ruta correcta de tu archivo PNG
-                width: 100.0,
-                height: 100.0,
+                'lib/assets/images/ludi_new_sin_fondo.png', // Reemplaza 'ruta_del_icono.png' con la ruta correcta de tu archivo PNG
+                width: 120.0,
+
                 // Color del icono
               ),
               /*Icon(Icons.book_rounded, color: Colors.white, size: 100.0),*/
@@ -198,7 +198,7 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25.0,
-                      fontFamily: 'Avenir')),
+                      fontFamily: 'LatiniaLight')),
             ],
           ),
         )

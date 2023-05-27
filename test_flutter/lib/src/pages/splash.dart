@@ -47,25 +47,38 @@ class _SplashPageState extends State<SplashPage>
         body: Stack(
       children: [
         crearFondo(context),
+        /*Container(
+          color: gradientStartColor, // Color de fondo gris oscuro
+        ),*/
         CustomPaint(
           painter: SplashPainter(animation, image),
           child: const SizedBox.expand(),
         ),
         Center(
             child: Column(children: <Widget>[
-          SizedBox(height: 250),
+          SizedBox(height: 200),
           Image.asset(
-            'lib/assets/images/ludi2new.png', // Reemplaza 'ruta_del_icono.png' con la ruta correcta de tu archivo PNG
-            width: 100.0,
-            height: 100.0,
+            'lib/assets/images/ludi_new_sin_fondo.png',
+            width: 200.0,
+            /*height: 100.0,*/
             // Color del icono
           ),
           Text(
             "LVDI VERBORVM ",
             style: TextStyle(
-                fontSize: 42,
-                color: titleTextColor,
-                fontWeight: FontWeight.w900),
+              fontSize: 42,
+              color: titleTextColor,
+              fontWeight: FontWeight.w900,
+              fontFamily: 'latiniaLight',
+              shadows: [
+                Shadow(
+                  color: Colors.black.withOpacity(0.5), // Color de la sombra
+                  offset: Offset(
+                      4, 4), // Desplazamiento de la sombra (eje x, eje y)
+                  blurRadius: 6, // Desenfoque de la sombra
+                ),
+              ],
+            ),
           ),
         ]))
       ],
