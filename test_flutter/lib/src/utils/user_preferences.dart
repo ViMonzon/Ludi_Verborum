@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:test_flutter/src/model/settings.dart';
+import 'package:ludi_verborum/src/model/settings.dart';
 
 class PreferencesService {
   Future saveSettings(String email, Settings settings) async {

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:test_flutter/src/utils/user_preferences.dart';
+import 'package:ludi_verborum/src/utils/user_preferences.dart';
 
 import '../bloc/provider.dart';
 import '../themes/constants.dart';
