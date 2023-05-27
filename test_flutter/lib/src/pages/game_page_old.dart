@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:ludi_verborum/src/bloc/login_bloc.dart';
 import '../../http.dart';
 import '../bloc/provider.dart';
 import '../themes/constants.dart';

@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:test_flutter/src/bloc/provider.dart';
-import 'package:test_flutter/src/bloc/login_bloc.dart';
-import 'package:test_flutter/src/widgets/header_widget_home.dart';
-import 'package:test_flutter/src/widgets/crear_fondo.dart';
+import 'package:ludi_verborum/src/bloc/provider.dart';
+import 'package:ludi_verborum/src/bloc/login_bloc.dart';
+import 'package:ludi_verborum/src/widgets/header_widget_home.dart';
+import 'package:ludi_verborum/src/widgets/crear_fondo.dart';
 import '../../http.dart';
 import '../themes/constants.dart';
 import '../themes/constants.dart';

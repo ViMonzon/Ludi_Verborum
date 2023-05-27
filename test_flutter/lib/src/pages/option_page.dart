@@ -1,5 +1,5 @@
-import 'package:test_flutter/src/utils/user_preferences.dart';
-import 'package:test_flutter/src/model/settings.dart';
+import 'package:ludi_verborum/src/utils/user_preferences.dart';
+import 'package:ludi_verborum/src/model/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';

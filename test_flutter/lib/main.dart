@@ -1,14 +1,14 @@
 //@dart=2.9
 
 import 'package:flutter/material.dart';
-import 'package:test_flutter/src/bloc/provider.dart';
-import 'package:test_flutter/src/pages/dictionary.dart';
-import 'package:test_flutter/src/pages/home_page.dart';
-import 'package:test_flutter/src/pages/login_page.dart';
-import 'package:test_flutter/src/pages/game_page.dart';
+import 'package:ludi_verborum/src/bloc/provider.dart';
+import 'package:ludi_verborum/src/pages/dictionary.dart';
+import 'package:ludi_verborum/src/pages/home_page.dart';
+import 'package:ludi_verborum/src/pages/login_page.dart';
+import 'package:ludi_verborum/src/pages/game_page.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:test_flutter/src/pages/option_page.dart';
-import 'package:test_flutter/src/pages/splash.dart';
+import 'package:ludi_verborum/src/pages/option_page.dart';
+import 'package:ludi_verborum/src/pages/splash.dart';
 
 import 'src/pages/add_palabra.dart';
 

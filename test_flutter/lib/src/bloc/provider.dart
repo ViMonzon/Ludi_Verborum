@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/src/bloc/login_bloc.dart';
-export 'package:test_flutter/src/bloc/login_bloc.dart';
+import 'package:ludi_verborum/src/bloc/login_bloc.dart';
+export 'package:ludi_verborum/src/bloc/login_bloc.dart';
 
 class Provider extends InheritedWidget {
   final loginBloc = LoginBloc();

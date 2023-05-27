@@ -1,7 +1,7 @@
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:test_flutter/src/bloc/provider.dart';
+import 'package:ludi_verborum/src/bloc/provider.dart';
 
 import '../../http.dart';
 import '../themes/constants.dart';
