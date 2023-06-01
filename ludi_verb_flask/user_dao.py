@@ -41,8 +41,10 @@ class UserDAO:
         except Exception as e:
             return None
     
+    # Buscar usuario por UID
+    #No utilizado. Implementación para aumentar seguridad.
     def get_user(self, uid):
-        # Código del método get_user
+        
         try:
             user = auth.get_user(uid)
             print(user)
@@ -51,12 +53,18 @@ class UserDAO:
         except Exception as e:
             print(f"No se pudo encontrar al usuario con uid {uid}: {e}")
             return None
-
-    def authenticate_user(self, email, password):
+    
+    #Método login
     # Autentica al usuario en Firebase Authentication
+    #Entrada email y password
+    #Devuelve [bool, error]
+    def authenticate_user(self, email, password):
+    
         return login(email, password)
         
-        
+    #Método encontrar palabaras por letra:
+    #Entrada mail y letra
+    # Devuelve listado palabras    
     def get_words_letter(self, user_email, letter):
         db = firestore.client()
         letter_collection = db.collection('users').document(user_email).collection("letter")
@@ -66,6 +74,10 @@ class UserDAO:
         print(words)            
         return words
     
+        
+    #Método encontrar palabaras del diccionario:
+    #Entrada mail
+    # Devuelve listado palabras 
     def get_words(self,user_email):
         db = firestore.client()
         letter_collection = db.collection('users').document(user_email).collection("letter")
@@ -76,6 +88,9 @@ class UserDAO:
         print("esto son las palabras:" + str(words))            
         return words
 
+    #Método encontrar palabaras del diccionario junto con sus definiciones:
+    #Entrada mail
+    # Devuelve listado de diccionario de palabra y definiciones. (No utilizado por bug de Flutter Lost Connection)
     def get_all_words(self,user_email):
         db = firestore.client()
         word_list=[]
@@ -95,13 +110,18 @@ class UserDAO:
         print(type(word_list))
         return word_list
     
+    #Método encontrar definiciones por palabra:
+    #Entrada mail y palabra
+    # Devuelve listado de definiciones 
     def get_def(self,user_email, word):
         db = firestore.client()
         def_list = db.collection('users').document(user_email).collection('letter').document(unidecode(word[0])).collection('word').document(word).get().to_dict().get('definiciones', [])
         print(def_list)
         return def_list
         
-
+    #Método comprobar palabra del diccionario:
+    #Entrada mail y palabra
+    # Devuelve bool
     def check_word_dict(self, user_email, word):
         words = self.get_words_letter(user_email, word[0])
         for word_res in words:
@@ -110,7 +130,9 @@ class UserDAO:
                 return False
         return True
 
-
+    #Método añadir palabra en diccionario
+    #Entrada mail y palabra
+    # Devuelve bool
     def add_word_to_dic(self, user_email, word):
         if self.check_word_dict(user_email, word):
             word_f = scrap_rae.myword(word)
@@ -124,11 +146,17 @@ class UserDAO:
         else:
             return False
         
-
+     #Método borrar palabra en diccionario
+    #Entrada mail y palabra
+    # Devuelve bool
     def delete_word_to_dic(self, user_email, word):
         db = firestore.client()
         db.collection('users').document(user_email).collection("letter").document(unidecode(word[0])).collection("word").document(word).delete()
 
+
+    #Método extraer listado palabras al azar en diccionario
+    #Entrada mail
+    # Devuelve List de diccionario de {palabra, definiciones[]}
     def get_random_words(self, user_email):
         db = firestore.client()
         word_list=[]

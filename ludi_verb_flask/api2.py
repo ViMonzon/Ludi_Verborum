@@ -26,13 +26,12 @@ default_words = ['almendra', 'alondra', 'barco', 'casa', 'dedo', 'elefante', 'fl
                  'león', 'mariposa', 'nido', 'oso', 'pájaro', 'quesadilla', 'rana', 'silla', 'tren', 'unicornio', 'vino', 'zapatilla']
 
 # Gestión de usuarios de Flask
-
-
+# Método utilizado en Api Web. Actualmente no es utilizado.
 @login_manager.user_loader
 def load_user(user_id):
     return User.get(user_id)
 
-
+#Método para autenticación de usuario. Utilizado en métodos posteriores.
 def authenticate_and_login_user(email, password):
     auth_result = user_dao.authenticate_user(email, password)
     if auth_result[0]:
@@ -44,7 +43,9 @@ def authenticate_and_login_user(email, password):
         return True
     return False
 
-
+#Método de registro. 
+#Recibe de la app JSON con email y password.
+#Crea un nuevo usuario y añade diccionario.
 @app.route('/register', methods=['POST'])
 def create():
     if 'email' not in request.json or 'password' not in request.json:
@@ -64,7 +65,9 @@ def create():
     else:
         return jsonify(["Wrong Credentials"])
 
-
+#Método de registro. 
+#Recibe de la app JSON con email y password.
+#Comprueba la validez del usuario almacenado en FireBase y devuelve error en caso de no ser válido.
 @app.route('/login', methods=['POST'])
 def login():
     if 'email' not in request.json or 'password' not in request.json:
@@ -81,16 +84,19 @@ def login():
     else:
         return jsonify(["Wrong Credentials"])
 
-
+#Método para levantar un temaplate y chequear que el server está levantado.
+#No utilizado en la App.
 @app.route('/', methods=['POST', 'GET'])
-def hello():
+def init():
     try:
         return render_template('home.html')
     except Exception as e:
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
-
+#Método para listar diccionario 
+#Recibe un JSON con email del usuario.
+#devuelve un listado de palabras en JSON.
 @app.route('/dictionary', methods=['POST'])
 def list_dict():
     user_email = request.json['email']
@@ -104,7 +110,9 @@ def list_dict():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
-
+#Método para juego
+#Recibe un JSON con email del usuario.
+#Devuelve un listado de palabras y definiciones al azar en JSON.
 @app.route('/game', methods=['POST'])
 def list_game():
     user_email = request.json['email']
@@ -118,10 +126,11 @@ def list_game():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
+#Método para listar definicioes de palabras
+#Recibe un JSON con email del usuario y palabra
+#Devuelve un listado de definiciones en JSON.
 @app.route('/definitions', methods=['POST'])
-def list_def():
-     
-    
+def list_def():    
         user_email = request.json['email']
         word_f = request.json['word']
         print(user_email + word_f)  
@@ -137,7 +146,9 @@ def list_def():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 """
-
+#Método para añadir nueva palabra y sus definiciones.
+#Recibe un JSON con email del usuario y palabra.
+#Devuelve confirmación o error.
 @app.route('/add', methods=['POST'])
 def add():    
     try:
@@ -155,6 +166,9 @@ def add():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
 
+#Método para borrar palabra y sus definiciones.
+#Recibe un JSON con email del usuario y palabra.
+#Devuelve confirmación o error.
 @app.route('/delete', methods=['POST'])
 def delete():
     try:
@@ -169,7 +183,7 @@ def delete():
         app.logger.error(str(e))
         return 'Error: ' + str(e), 500
     
-
+#Método logout. No utilizado en esta App. Posible implementación futura.
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
@@ -179,5 +193,5 @@ def logout():
 
 # PUERTO 5000 por defecto: http://localhost:5000/
 if __name__ == "__main__":
-    WSGIRequestHandler.protocol_version = "HTTP/1.1" #Arreglar Connection closed while receiving data
+    WSGIRequestHandler.protocol_version = "HTTP/1.1" #Arreglar Bug Connection closed while receiving data
     app.run(threaded=True)
