@@ -17,10 +17,6 @@ Ludi Verborum es una aplicación móvil que consiste en un juego de adivinación
 - Firebase: Una plataforma de desarrollo de aplicaciones móviles en la nube que proporciona servicios como autenticación de usuarios y almacenamiento de datos en tiempo real.
 - Github: Para el control de versiones y el desarrollo colaborativo de la aplicación.
 
-## Preview de la aplicación
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4a90b806-18ea-4579-a858-9648f48362be/Untitled.png)
-
 ## Instalación y ejecución
 
 1. Clona este repositorio en tu máquina local:
