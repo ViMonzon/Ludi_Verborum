@@ -82,30 +82,14 @@ Ludi Verborum es una aplicación móvil que consiste en un juego de adivinación
 
 Una vez hayamos ejecutado la aplicación, detallamos lo que vamos a ir encontrando, lo primero que vamos a encontrar es el Splash, con el logo de la aplicación,
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/385ad635-3766-4d3b-baf2-bafbacc00f79/Untitled.png)
-
 Tras esto encontraremos la pantalla de login, aquí podemos crear una cuenta nueva o loguearnos con nuestro mail y contraseña, 
-
-https://github.com/ViMonzon/Ludi_Verborum/assets/78167402/344d4fb9-df00-4aa1-a825-f33dbb88e4c0
 
 Tras esto llegaremos al menú, en el que veremos todas las opciones de la aplicación, podemos ir al juego, añadir una palabra, ver y gestionar el diccionario, modificar las opciones o cerrar la sesión
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a145d407-77cb-45a5-afcb-25cbf2ee7ae6/Untitled.png)
-
 El juego consiste en adivinar las palabras con las pistas que tenemos, estas son las definiciones y la inicial de la letra, al finalizar el tiempo o contestar todas las letras , veremos nuestro resultado. 
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/10bb7478-b6d3-4644-9736-2d668e0c48ed/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/08a8b0eb-44e8-469e-bdb6-c5cc08498fd7/Untitled.png)
 
 Para añadir palabras en el juego tenemos la pantalla de añadir palabra, cuando añadamos la palabra la aplicación automáticamente irá a la fuente y descargará todas las definiciones de dicha palabra, para almacenarlo en nuestro diccionario
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/454e4e94-7e2f-4fcf-92c6-8b58691662f9/Untitled.png)
-
 El diccionario será el mismo para todos los usuarios nuevos, una vez registrados podrán borrar y añadir las palabras a su elección, lo que hará que el diccionario sea personal. Además verán las definiciones de las palabras
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/de769021-8edd-40b0-9db8-177d888564d4/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fc108359-ae8b-48f3-86f5-fd24ea5d3893/Untitled.png)
 
 En la pantalla de opciones el usuario podrá cambiar su nombre de usuario y cambiar el tiempo del temporizador, esto afectará a la dificultad del juego. En cuanto al nombre de usuario, se verá en la pantalla del menú, sino cambiamos el nombre de usuario se verá el mail con el que se ha registrado el usuario.
