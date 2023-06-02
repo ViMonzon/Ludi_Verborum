@@ -21,7 +21,12 @@ Una característica única de la aplicación es que las definiciones se obtienen
 - Firebase: Una plataforma de desarrollo de aplicaciones móviles en la nube que proporciona servicios como autenticación de usuarios y almacenamiento de datos en tiempo real.
 - Github: Para el control de versiones y el desarrollo colaborativo de la aplicación.
 
-## Instalación y ejecución
+## Ejecutables 
+- Descomprimir archivo ludi_verborum_exe.zip. En este se encuentra el ejecuatable del servidor Python (junto con las credenciales de la base de datos de FireBase que se pueden modificar en caso de que se quiera usar uno propio y el apk para instalarlo en el emulador.
+- Por el momento funciona en entorno local.  
+
+
+## Instalación y ejecución para desarrollo
 
 1. Clona este repositorio en tu máquina local:
     
@@ -31,7 +36,7 @@ Una característica única de la aplicación es que las definiciones se obtienen
     
 
 1. El repositorio consta de dos partes, necesarias para la ejecución de la aplicación,
-- SERVER y SCRAPER
+- SERVER
     
     **ludi_verb_flask**
     
@@ -55,7 +60,9 @@ Una característica única de la aplicación es que las definiciones se obtienen
     python api2.py
     ```
     
-    Este comando ejecuta tanto el scraper, como levantar el server. 
+    Este comando ejecuta tanto el scraper, como levantar el server.
+
+**Nota** Se mantiene el archivo api.py para poder demostrar el funcionamiento y las pruebas en los primeros estadios del desarrllo para poder desarrollar tanto la app(flutter) como el server de manera simultánea.
     
 - APP
     

@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.ludi_verborum">
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="ludi_verborum"
         android:name="${applicationName}"
