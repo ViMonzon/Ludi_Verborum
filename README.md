@@ -4,11 +4,11 @@
 
 
 
-Ludi Verborum es una aplicación móvil que consiste en un juego de adivinación, el objetivo del juego es adivinar la palabra correcta utilizando las pistas proporcionadas.
+Ludi Verborum es una aplicación móvil de juego desarrollada en Flutter, Python y Firebase. El objetivo principal del juego es adivinar palabras utilizando las pistas proporcionadas que son, las definiciones y la inicial de la palabra. 
+Una característica única de la aplicación es que las definiciones se obtienen directamente desde la web de la RAE, esto garantiza que la información esté siempre actualizada y precisa. 
 
-## Características de la aplicación
+## Características del juego
 
-- Juego de adivinanzas de palabras basado en definiciones y letras iniciales.
 - Interfaz de usuario intuitiva y atractiva.
 - Posibilidad de añadir y ampliar tu diccionario.
 - Integración con Firebase para almacenamiento y autenticación de usuarios.
@@ -80,16 +80,19 @@ Ludi Verborum es una aplicación móvil que consiste en un juego de adivinación
 
 ## ¿Cómo juego?
 
-Una vez hayamos ejecutado la aplicación, detallamos lo que vamos a ir encontrando, lo primero que vamos a encontrar es el Splash, con el logo de la aplicación,
+Una vez hayamos ejecutado la aplicación, lo primero que vamos a encontrar es el Splash, con el logo de la aplicación, tras esto encontraremos la pantalla de login, aquí podemos crear una cuenta nueva o loguearnos con nuestro mail y contraseña.
 
-Tras esto encontraremos la pantalla de login, aquí podemos crear una cuenta nueva o loguearnos con nuestro mail y contraseña, 
+Ahora llegaremos al menú, en el que veremos todas las opciones de la aplicación, podemos ir al juego, añadir una palabra, ver y gestionar el diccionario, modificar las opciones o cerrar la sesión.
 
-Tras esto llegaremos al menú, en el que veremos todas las opciones de la aplicación, podemos ir al juego, añadir una palabra, ver y gestionar el diccionario, modificar las opciones o cerrar la sesión
+El juego consiste en adivinar las palabras con las pistas que tenemos, estas son las definiciones y la inicial de la letra, al finalizar el tiempo o contestar todas las letras, veremos nuestro resultado. 
 
-El juego consiste en adivinar las palabras con las pistas que tenemos, estas son las definiciones y la inicial de la letra, al finalizar el tiempo o contestar todas las letras , veremos nuestro resultado. 
+Para añadir palabras en el juego tenemos la pantalla de añadir palabra, cuando añadamos la palabra la aplicación automáticamente irá a la fuente y descargará todas las definiciones de dicha palabra, para almacenarlo en nuestro diccionario.
 
-Para añadir palabras en el juego tenemos la pantalla de añadir palabra, cuando añadamos la palabra la aplicación automáticamente irá a la fuente y descargará todas las definiciones de dicha palabra, para almacenarlo en nuestro diccionario
+El diccionario será el mismo para todos los usuarios nuevos, una vez registrados podrán borrar y añadir las palabras a su elección, lo que hará que el diccionario sea personal. Además verán las definiciones de las palabras.
 
-El diccionario será el mismo para todos los usuarios nuevos, una vez registrados podrán borrar y añadir las palabras a su elección, lo que hará que el diccionario sea personal. Además verán las definiciones de las palabras
+En la pantalla de opciones el usuario podrá cambiar su nombre de usuario o cambiar el tiempo del temporizador, esto afectará a la dificultad del juego. En cuanto al nombre de usuario, se verá en la pantalla del menú, sino cambiamos el nombre de usuario se verá el mail con el que se ha registrado el usuario.
 
-En la pantalla de opciones el usuario podrá cambiar su nombre de usuario y cambiar el tiempo del temporizador, esto afectará a la dificultad del juego. En cuanto al nombre de usuario, se verá en la pantalla del menú, sino cambiamos el nombre de usuario se verá el mail con el que se ha registrado el usuario.
+## Autores
+
+Victor Manuel Monzón Pérez
+Luz María Lozano Asimbaya
