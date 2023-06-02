@@ -73,8 +73,7 @@ class _GamePageState extends State<GamePage> {
         decoration: BoxDecoration(
             gradient:
                 LinearGradient(colors: <Color>[fondoNaranja, fondoMorado])),
-        child: Expanded(
-            child: Column(
+        child: Column(
           children: <Widget>[
             /*crearFondo(context),*/
             const HeaderWidget(),
@@ -92,42 +91,42 @@ class _GamePageState extends State<GamePage> {
               ),
             ),
             Expanded(
-                child: SingleChildScrollView(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height,
-                  maxWidth: MediaQuery.of(context).size.width,
-                ),
-                child: Swiper(
-                  controller: _swiperController,
-                  itemCount: palabras.length,
-                  itemWidth: MediaQuery.of(context).size.width,
-                  itemHeight: MediaQuery.of(context).size.height,
-                  layout: SwiperLayout.TINDER,
-                  itemBuilder: (context, index) {
-                    return IndexedStack(
-                      children: [
-                        Column(
-                          children: [
-                            CustomCard(
-                              // añadir key para automatizar la actualización de Status
-                              key: Key(palabras[index]),
-                              palabra: palabras[index],
-                              definicion: definiciones[index],
-                              eliminarTarjeta: () => eliminarTarjeta(index),
-                              sumarAcierto: () => sumarAcierto(),
-                              sumarFallo: () => sumarFallo(),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
+              child: SingleChildScrollView(
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height,
+                    maxWidth: MediaQuery.of(context).size.width,
+                  ),
+                  child: Swiper(
+                    controller: _swiperController,
+                    itemCount: palabras.length,
+                    itemWidth: MediaQuery.of(context).size.width,
+                    itemHeight: MediaQuery.of(context).size.height,
+                    layout: SwiperLayout.TINDER,
+                    itemBuilder: (context, index) {
+                      return IndexedStack(
+                        children: [
+                          Column(
+                            children: [
+                              CustomCard(
+                                key: Key(palabras[index]),
+                                palabra: palabras[index],
+                                definicion: definiciones[index],
+                                eliminarTarjeta: () => eliminarTarjeta(index),
+                                sumarAcierto: () => sumarAcierto(),
+                                sumarFallo: () => sumarFallo(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
-            ))
+            ),
           ],
-        )),
+        ),
       ),
     );
   }
