@@ -88,12 +88,6 @@ class _OptionsPageState extends State<OptionsPage> {
                   ),
                   SizedBox(height: 30),
                   _botonOpciones(context),
-                  /*TextButton(
-                onPressed: () {
-                  _saveSettings(bloc.email);
-                },
-                child: Text('Save Settings'),
-             )*/
                 ]),
               ),
             ],

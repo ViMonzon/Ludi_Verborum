@@ -30,14 +30,6 @@ Widget crearFondo(BuildContext context) {
       Positioned(bottom: -50.0, left: 10.0, child: circulo),
       Container(
         padding: EdgeInsets.only(top: 100.0),
-        /*child: Column(
-            children: <Widget>[
-              Icon(Icons.book_rounded, color: Colors.white, size: 100.0),
-              SizedBox(height: 10.0, width: double.infinity),
-              Text('LUDI VERBORUM',
-                  style: TextStyle(color: Colors.white, fontSize: 25.0)),
-            ],
-          ),*/
       )
     ],
   );
