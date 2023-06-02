@@ -1,3 +1,7 @@
+
+![](letras_ludi_color.png)
+
+
 # LUDI VERBORUM
 
 Ludi Verborum es una aplicación móvil que consiste en un juego de adivinación, el objetivo del juego es adivinar la palabra correcta utilizando las pistas proporcionadas.
