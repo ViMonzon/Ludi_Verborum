@@ -95,4 +95,5 @@ En la pantalla de opciones el usuario podrá cambiar su nombre de usuario o camb
 ## Autores
 
 Victor Manuel Monzón Pérez
+
 Luz María Lozano Asimbaya
